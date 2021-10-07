@@ -19,42 +19,46 @@
             <div class="uk-navbar-item">
                 <form action="javascript:void(0)">
                     <input class="uk-input uk-form-width-small" type="text" placeholder="Find a Game">
-                    <button class="uk-button uk-button-default">Search</button>
+                    <button class="uk-button uk-button-default" id="search">Search</button>
                 </form>
             </div>
         </div>
     </nav>
     <form class="uk-form-stacked">
-        <div class="uk-margin">
-            <h3>Search for a game</h3>
-            <div class="uk-form-label">Platform</div>
-            <div class="uk-form-controls">
-                <label><input class="uk-radio" type="radio" name="radio1"> Playstation</label><br>
-                <label><input class="uk-radio" type="radio" name="radio2"> XBOX</label><br>
-                <label><input class="uk-radio" type="radio" name="radio3"> PC</label><br>
+        <div class="uk-child-width-expand@s uk-text-left" uk-grid>
+            <div class="uk-margin">
+                <h3>Search for a game</h3>
+                <div class="uk-form-label">Platform</div>
+                <div class="uk-form-controls">
+                    <label><input class="uk-radio" type="radio" name="radio1" id="playstation"> Playstation</label><br>
+                    <label><input class="uk-radio" type="radio" name="radio2" id="xbox"> XBOX</label><br>
+                    <label><input class="uk-radio" type="radio" name="radio3" id="pc"> PC</label><br>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-select">Genre</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                        <option id="action">Action</option>
+                        <option id="shooter">Shooter</option>
+                        <option id="racing">Racing</option>
+                        <option id="sports">Sports</option>
+                        <option id="rpg">RPG</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-form-label">Player</div>
+                <div class="uk-form-controls">
+                    <label><input class="uk-radio" type="radio" name="radio1" id="single"> SinglePlayer</label><br>
+                    <label><input class="uk-radio" type="radio" name="radio2" id="multi"> Multiplayer</label><br>
+                </div>
+                <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
             </div>
         </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-select">Genre</label>
-            <div class="uk-form-controls">
-                <select class="uk-select uk-form-width-small" id="form-stacked-select">
-                    <option>Action</option>
-                    <option>Shooter</option>
-                    <option>Racing</option>
-                    <option>Sports</option>
-                    <option>RPG</option>
-                </select>
-            </div>
-        </div>
-        <div class="uk-margin">
-            <div class="uk-form-label">Player</div>
-            <div class="uk-form-controls">
-                <label><input class="uk-radio" type="radio" name="radio1"> SinglePlayer</label><br>
-                <label><input class="uk-radio" type="radio" name="radio2"> Multiplayer</label><br>
-            </div>
-            <button class="uk-button uk-button-primary">Search Games</button>
     </form>
     <script src="script.js"></script>
+
 </body>
 
 </html>
