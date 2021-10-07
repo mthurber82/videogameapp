@@ -13,3 +13,15 @@
 // append div element to document
 // append text element to div element 
 // append button element to div element 
+fetch("https://api.rawg.io/api/games?search=vampire-the-masquerade-bloodlines-2&key=" + APIKey)
+    .then(function (response) {
+        
+        
+        return response.json();
+        
+      
+    })
+    .then(function (data) {
+        console.log(data)
+        return data;
+    })
