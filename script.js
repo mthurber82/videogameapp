@@ -3,7 +3,10 @@ var search = document.getElementById('search');
 var searchParameters = document.getElementById('searchgames');
 var gameInput = document.getElementById('needID');
 var platform = document.getElementById('needID');
-var genre = document.getElementById('form-stacked-select');
+var consoleType = document.getElementById("console_type")
+
+var genre = document.getElementById("genreDropDown");
+// var genre = document.getElementById('form-stacked-select');
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 
 
@@ -47,10 +50,14 @@ search.addEventListener("click", function() {
     
 });
 
-var consoleType = document.getElementById("console_type")
-// console.log(consoleType)
 
+// console.log(genre);
+//drop down
+genre.addEventListener("change", function (e) {
+console.log(e.target.value)
+})
 
+//Radio button
 consoleType.addEventListener("change", function () {
     array1 = []
     let temp =consoleType.getElementsByClassName("uk-radio")
@@ -66,6 +73,8 @@ consoleType.addEventListener("change", function () {
     return
       
 })
+
+
 
 
 
