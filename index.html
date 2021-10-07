@@ -15,17 +15,45 @@
 <body>
     <nav class="uk-navbar-container uk-margin" uk-navbar>
         <div class="uk-navbar-left">
-
-            <a class="uk-navbar-item uk-logo" href="#">Logo</a>
+            <a class="uk-navbar-item uk-logo" href="#">GG</a>
             <div class="uk-navbar-item">
                 <form action="javascript:void(0)">
-                    <input class="uk-input uk-form-width-small" type="text" placeholder="input">
+                    <input class="uk-input uk-form-width-small" type="text" placeholder="Find a Game">
                     <button class="uk-button uk-button-default">Search</button>
                 </form>
             </div>
-
         </div>
     </nav>
+    <form class="uk-form-stacked">
+        <div class="uk-margin">
+            <h3>Search for a game</h3>
+            <div class="uk-form-label">Platform</div>
+            <div class="uk-form-controls">
+                <label><input class="uk-radio" type="radio" name="radio1"> Playstation</label><br>
+                <label><input class="uk-radio" type="radio" name="radio2"> XBOX</label><br>
+                <label><input class="uk-radio" type="radio" name="radio3"> PC</label><br>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-select">Genre</label>
+            <div class="uk-form-controls">
+                <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                    <option>Action</option>
+                    <option>Shooter</option>
+                    <option>Racing</option>
+                    <option>Sports</option>
+                    <option>RPG</option>
+                </select>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <div class="uk-form-label">Player</div>
+            <div class="uk-form-controls">
+                <label><input class="uk-radio" type="radio" name="radio1"> SinglePlayer</label><br>
+                <label><input class="uk-radio" type="radio" name="radio2"> Multiplayer</label><br>
+            </div>
+            <button class="uk-button uk-button-primary">Search Games</button>
+    </form>
     <script src="script.js"></script>
 </body>
 
