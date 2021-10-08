@@ -3,8 +3,8 @@ var search = document.getElementById('search');
 var searchParameters = document.getElementById('searchgames');
 var gameInput = document.getElementById('needID');
 var platform = document.getElementById('needID');
-var consoleType = document.getElementById("console_type")
-
+var consoleType = document.getElementById("console_type");
+var players = document.getElementById('player-input');
 var genre = document.getElementById("genreDropDown");
 // var genre = document.getElementById('form-stacked-select');
 var key = "385f0044190e471aa3e65b5f36e4f71a";
@@ -69,14 +69,55 @@ consoleType.addEventListener("change", function () {
         console.log(array1[i])
     }
     
-    
+
     return
       
 })
 
+//listen to changes in the number of players from the search parameter 
+players.addEventListener("change", function() {
+    array2 = [];
+    let plyr = players.getElementsByClassName("player-num");
+    for (var i = 0; i < plyr.length; i++) {
+        if (plyr[i].checked) {
+            array2.push(plyr[i].id);
+            // console.log(plyr[i].id);
+        }
+    }
+        choosePlayer(array2);
+});
 
 
+// create function to append chosen values to search url
+function choosePlayer(value) {
+    var player1 = null;
+    var player2 = null;
 
+    for( var i=0; i<value.length; i++) {
+        if (value[i] === 'singleplayer') {
+            player1 = 'singleplayer'
+            console.log(player1)
+        }
+        if (value[i] === 'multiplayer') {
+            player2 = 'multiplayer'
+            console.log(player2)
+        }
+    }
+    if (player1 !== null && player2 === null) {
+        // return player1;
+        console.log(player1)
+    }
+
+    if (player1 !== null && player2 !== null) {
+        let player3 = player1 + ',' + player2;
+        // return player3;
+        console.log(player3)
+    }
+};
+
+searchParameters.addEventListener('click', function() {
+    
+});
 
     // for (let i = 0; i < consoleType.length; i++){
     //     console.log(consoleType[i].id)
