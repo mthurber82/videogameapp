@@ -113,33 +113,38 @@ function gameArray() {
          //console.log(data)
         gameArray = gameArray.concat(data.results)
 
-        // console.log(gameArray)
+        console.log(arrayFunction(gameArray));
+
         temp.push(arrayFunction(gameArray))
 
         })
         
     }
-    console.log(temp[3])
+    console.log
 }
 
 function arrayFunction(filterArray) {
 
     var genreValue = "RPG"
     var userPlatfolmChoice = "Xbox";
-    var userPlayerChoice = "Multiplayer";
+    var userPlayerChoice = 31;
+            // var containsThisGenre = false;
+        // for (let i = 0; i < game.genres.length; i ++) {
+        //     if (game.genres[i].name === genreValue) {
+        //         containsThisGenre = true;
+        //     }
+        // }
+        // return containsThisGenre;
+        // console.log(game.genres);
+        // console.log(game.genres.map(g => g.name))
 
-    var userChoiceArr = filterArray.filter(game => game.genres.filter(genre => genre.name == genreValue))
-                            .filter(game => game.parent_platforms.filter(platform => platform.name == userPlatfolmChoice))
-                            .filter(game => game.tags.filter(players => players.name == userPlayerChoice))
-        return userChoiceArr
+    var userChoiceArr = filterArray.filter(game => game.genres.map(g => g.name).includes(genreValue))
+    .filter(game => game.parent_platforms.map(g => g.platform.name).includes(userPlatfolmChoice))
+    .filter(game => game.tags.map(g => g.id).includes(userPlayerChoice))
+                            // .filter(game => game.parent_platforms.filter(platform => platform.name == userPlatfolmChoice))
+                            // .filter(game => game.tags.filter(players => players.name == userPlayerChoice)
 
-    console.log(userChoiceArr)
-    // for (var i=0; i< userChoiceArr.length ; i++) {
-    //     for(var n=0; n < userChoiceArr[i].parent_platforms.length; n++) {
-    //         console.log(userChoiceArr[i].parent_platforms[n].platform.name)
-    //     }
-        
-    // }
+    return userChoiceArr;
 }
 
 
