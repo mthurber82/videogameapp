@@ -31,22 +31,23 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <form class="uk-form-stacked" id="form">
                     <div class="uk-margin">
-                        <h3>Search for a game</h3>
-                        <div class="uk-form-label">Platform</div>
-                        <div class="uk-form-controls" id="console_type">
-                            <label><input class="uk-radio" type="radio" name="radio1" id="playstation">
-                                Playstation</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio2" id="xbox"> XBOX</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio3" id="pc"> PC</label><br>
+                        <h3>Search for a Game</h3>
+                        <label class="uk-form-label" for="form-stacked-select">Platform</label>
+                        <div class="uk-form-controls" id="genreDropDown">
+                            <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                                <option value="" disabled selected hidden>Platform</option>
+                                <option id="action">Playstation</option>
+                                <option id="shooter">XBOX</option>
+                                <option id="racing">PC</option>
+                            </select>
                         </div>
-
                     </div>
-
 
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-select">Genre</label>
                         <div class="uk-form-controls" id="genreDropDown">
                             <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                                <option value="" disabled selected hidden>Genre</option>
                                 <option id="action">Action</option>
                                 <option id="shooter">Shooter</option>
                                 <option id="racing">Racing</option>
@@ -56,12 +57,13 @@
                         </div>
                     </div>
                     <div class="uk-margin">
-                        <div class="uk-form-label">Player</div>
-                        <div class="uk-form-controls">
-                            <label><input class="uk-radio" type="radio" name="radio1" id="single">
-                                SinglePlayer</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio2" id="multi">
-                                Multiplayer</label><br>
+                        <label class="uk-form-label" for="form-stacked-select">Player</label>
+                        <div class="uk-form-controls" id="genreDropDown">
+                            <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                                <option value="" disabled selected hidden>Player</option>
+                                <option id="action">SinglePlayer</option>
+                                <option id="shooter">MultiPlayer</option>
+                            </select>
                         </div>
                         <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
 
