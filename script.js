@@ -24,7 +24,7 @@ function searchGames(game) {
     })
     //return json response as data
         .then(function (data) {
-        console.log(data)
+        // console.log(data)
         //create for loop to increment through each returned search result
         for(var i = 0; i < data.results.length; i++) {
             if (data.results.length === 0) {
@@ -62,7 +62,7 @@ search.addEventListener("click", function() {
 
 //drop down
 genre.addEventListener("change", function (e) {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     globalGenre.push(e.target.value);
 })
 
@@ -72,10 +72,10 @@ consoleType.addEventListener("change", function () {
     let temp =consoleType.getElementsByClassName("uk-radio")
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].checked) {
-            globalConsole.push(temp[i].id)
+            // globalConsole.push(temp[i].id)
             
         }
-        console.log(globalConsole[i])
+        // console.log(globalConsole[i])
     }
     return
 })
@@ -93,9 +93,10 @@ players.addEventListener("change", function() {
 
 
 function gameArray() {
-    console.log()
+    // console.log()
     let gameArray = [];
-    
+    let temp = [];
+
     for (var i=1; i <= 4; i++) {
 
         var fetchPages = 'https://api.rawg.io/api/games?page_size=40&page='+i+'&key=385f0044190e471aa3e65b5f36e4f71a'
@@ -109,23 +110,36 @@ function gameArray() {
         //return json response as data
         .then(function (data) {
 
-        console.log(data)
+         //console.log(data)
         gameArray = gameArray.concat(data.results)
 
-        console.log(gameArray)
-        arrayFunction(gameArray)
+        // console.log(gameArray)
+        temp.push(arrayFunction(gameArray))
+
         })
         
     }
+    console.log(temp[3])
 }
 
 function arrayFunction(filterArray) {
 
-    var genreValue = globalGenre[0];
+    var genreValue = "RPG"
+    var userPlatfolmChoice = "Xbox";
+    var userPlayerChoice = "Multiplayer";
 
-    for (var i=0; i< filterArray.length; i++) {
-        console.log(filterArray[i])
-    }
+    var userChoiceArr = filterArray.filter(game => game.genres.filter(genre => genre.name == genreValue))
+                            .filter(game => game.parent_platforms.filter(platform => platform.name == userPlatfolmChoice))
+                            .filter(game => game.tags.filter(players => players.name == userPlayerChoice))
+        return userChoiceArr
+
+    console.log(userChoiceArr)
+    // for (var i=0; i< userChoiceArr.length ; i++) {
+    //     for(var n=0; n < userChoiceArr[i].parent_platforms.length; n++) {
+    //         console.log(userChoiceArr[i].parent_platforms[n].platform.name)
+    //     }
+        
+    // }
 }
 
 
