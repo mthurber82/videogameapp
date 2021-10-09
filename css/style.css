@@ -7,12 +7,15 @@ footer{
   
 }
 body{
-  background-image: url("/Users/carsoncolgate/Desktop/537089.jpg");
+  background-image: url("../assets/js/img/537089.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .gamequery{
-  opacity: .5
+  opacity: .5;
+}
+
+nav{
 
 }
