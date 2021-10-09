@@ -8,6 +8,9 @@ var players = document.getElementById('player-input');
 var genre = document.getElementById("genreDropDown");
 var gameSection = document.getElementById("gamequery");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
+var globalConsole = [];
+var globalPlayers = [];
+var globalGenre = [];
 
 // function to create a list of games upon search request
 function searchGames(game) {
@@ -57,75 +60,40 @@ search.addEventListener("click", function() {
 });
 
 
-
 //drop down
 genre.addEventListener("change", function (e) {
-console.log(e.target.value)
+    console.log(e.target.value)
+    globalGenre.push(e.target.value);
 })
 
 //Radio button
 consoleType.addEventListener("change", function () {
-    array1 = []
+    // array1 = []
     let temp =consoleType.getElementsByClassName("uk-radio")
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].checked) {
-            array1.push(temp[i].id)
+            globalConsole.push(temp[i].id)
             
         }
-        console.log(array1[i])
+        console.log(globalConsole[i])
     }
     return
 })
 
 
-
 //listen to changes in the number of players from the search parameter 
 players.addEventListener("change", function() {
-    array2 = [];
     let plyr = players.getElementsByClassName("player-num");
     for (var i = 0; i < plyr.length; i++) {
         if (plyr[i].checked) {
-            array2.push(plyr[i].id);
+            globalPlayers.push(plyr[i].id);
         }
     }
-        choosePlayer(array2);
 });
 
 
-
-// create function to append chosen values to search url
-function choosePlayer(value) {
-    let player1 = null;
-    let player2 = null;
-    let playerArr = [];
-    for( var i=0; i<value.length; i++) {
-        if (value[i] === 'singleplayer') {
-            player1 = '31' // tag id for singleplayer
-            console.log(player1)
-        }
-        if (value[i] === 'multiplayer') {
-            player2 = '7' // tag id for multiplayer
-            console.log(player2)
-        }
-
-    }
-    if (player1 !== null && player2 === null) {
-        playerArr.push(player1)
-    }
-    if (player2 !== null && player1 === null) {
-        playerArr.push(player2)
-    }
-    if (player1 !== null && player2 !== null) {
-        let player3 = player1 + ',' + player2;
-        playerArr.push(player3)
-    }
-    createPlayerURL(playerArr);
-};
-
-
-
-function createPlayerURL(playerArr) {
-    console.log(playerArr)
+function gameArray() {
+    console.log()
     let gameArray = [];
     
     for (var i=1; i <= 4; i++) {
@@ -142,14 +110,24 @@ function createPlayerURL(playerArr) {
         .then(function (data) {
 
         console.log(data)
-        gameArray=gameArray.concat(data.results)
-        
+        gameArray = gameArray.concat(data.results)
+
         console.log(gameArray)
+        arrayFunction(gameArray)
         })
         
     }
+}
 
-        
+function arrayFunction(filterArray) {
+
+    var genreValue = globalGenre[0];
+
+    for (var i=0; i< filterArray.length; i++) {
+        console.log(filterArray[i])
+    }
+}
+
 
     // var playerSearchURL = `https://api.rawg.io/api/tags/${playerArr}&key=`+key;
 
@@ -164,12 +142,11 @@ function createPlayerURL(playerArr) {
     //     for (var i=0; i < data.results.length; i++) {
     //       //dynamically create more elements here??  
     //     }
-    //     return data;
-    })
-};
+//     //     return data;
+//     })
+// };
 
-searchParameters.addEventListener('click', function() {
-});
+searchParameters.addEventListener('click', gameArray())
 
     // for (let i = 0; i < consoleType.length; i++){
     //     console.log(consoleType[i].id)
@@ -207,3 +184,32 @@ searchParameters.addEventListener('click', function() {
 
 // platforms -->
 // fetch('https://api.rawg.io/api/platforms/4?key=385f0044190e471aa3e65b5f36e4f71a')
+
+// create function to append chosen values to search url
+// function choosePlayer(value) {
+//     let player1 = null;
+//     let player2 = null;
+//     let playerArr = [];
+//     for( var i=0; i<value.length; i++) {
+//         if (value[i] === 'singleplayer') {
+//             player1 = '31' // tag id for singleplayer
+//             console.log(player1)
+//         }
+//         if (value[i] === 'multiplayer') {
+//             player2 = '7' // tag id for multiplayer
+//             console.log(player2)
+//         }
+
+//     }
+    // if (player1 !== null && player2 === null) {
+    //     playerArr.push(player1)
+    // }
+    // if (player2 !== null && player1 === null) {
+    //     playerArr.push(player2)
+    // }
+    // if (player1 !== null && player2 !== null) {
+    //     let player3 = player1 + ',' + player2;
+    //     playerArr.push(player3)
+// }
+//     createPlayerURL(playerArr);
+// };
