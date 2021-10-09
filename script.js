@@ -9,13 +9,10 @@ var genre = document.getElementById("genreDropDown");
 var gameSection = document.getElementById("gamequery");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 
-
-
 // function to create a list of games upon search request
 function searchGames(game) {
     // url variable
     var gameSearchURL = 'https://api.rawg.io/api/games?search='+game+'&key='+key;
-
     fetch(gameSearchURL)
     // return response and convert to json
         .then(function (response) {
@@ -57,7 +54,6 @@ search.addEventListener("click", function() {
     let game = user_input.value
     // return function with user search input
     searchGames(game);
-    
 });
 
 
@@ -78,9 +74,7 @@ consoleType.addEventListener("change", function () {
         }
         console.log(array1[i])
     }
-
     return
-      
 })
 
 
@@ -128,35 +122,49 @@ function choosePlayer(value) {
     createPlayerURL(playerArr);
 };
 
-// get a list of tags doesnt work
-// fetch('https://api.rawg.io/api/tags?id=singleplayer&key=385f0044190e471aa3e65b5f36e4f71a')
-//     .then(function (response) {
-            
-//         return response.json();
-//     })
-//     //return json response as data
-//     .then(function (data) {
-//     console.log(data)
-//     })
 
 
 function createPlayerURL(playerArr) {
     console.log(playerArr)
-    var playerSearchURL = `https://api.rawg.io/api/tags/${playerArr}&key=`+key;
-    console.log(playerSearchURL)
-    fetch(playerSearchURL)
-    // return response and convert to json
-    .then(function (response) {
+    let gameArray = [];
+    
+    for (var i=1; i <= 4; i++) {
+
+        var fetchPages = 'https://api.rawg.io/api/games?page_size=40&page='+i+'&key=385f0044190e471aa3e65b5f36e4f71a'
+
+        fetch(fetchPages)
         
-        return response.json();
-    })
-    //return json response as data
-    .then(function (data) {
-    console.log(data)
-        for (var i=0; i < data.results.length; i++) {
-          //dynamically create more elements here??  
-        }
-        return data;
+        .then(function (response) {
+                
+            return response.json();
+        })
+        //return json response as data
+        .then(function (data) {
+
+        console.log(data)
+        gameArray=gameArray.concat(data.results)
+        
+        console.log(gameArray)
+        })
+        
+    }
+
+        
+
+    // var playerSearchURL = `https://api.rawg.io/api/tags/${playerArr}&key=`+key;
+
+    // fetch(playerSearchURL)
+    // .then(function (response) {
+        
+    //     return response.json();
+    // })
+    // //return json response as data
+    // .then(function (data) {
+    // console.log(data)
+    //     for (var i=0; i < data.results.length; i++) {
+    //       //dynamically create more elements here??  
+    //     }
+    //     return data;
     })
 };
 
@@ -196,3 +204,6 @@ searchParameters.addEventListener('click', function() {
 // fetch('https://api.rawg.io/api/tags/31?key=385f0044190e471aa3e65b5f36e4f71a')
 // multiplayer:
 // fetch('https://api.rawg.io/api/tags/7?key=385f0044190e471aa3e65b5f36e4f71a')
+
+// platforms -->
+// fetch('https://api.rawg.io/api/platforms/4?key=385f0044190e471aa3e65b5f36e4f71a')
