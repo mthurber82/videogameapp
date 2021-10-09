@@ -26,52 +26,73 @@
         </div>
     </nav>
     <div class="uk-grid">
-        <div class="uk-width-1-2">
-            <form class="uk-form-stacked">
-                <div class="uk-margin">
-                    <h3>Search for a game</h3>
-                    <div class="uk-form-label">Platform</div>
-                    <div class="uk-form-controls" id ="console_type">
-                        <label><input class="uk-radio console" type="radio" name="radio1" id="playstation">
-                            Playstation</label><br>
-                        <label><input class="uk-radio console" type="radio" name="radio2" id="xbox"> XBOX</label><br>
-                        <label><input class="uk-radio console" type="radio" name="radio3" id="pc"> PC</label><br>
-                    </div>
-                </div>
 
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-select">Genre</label>
-                    <div class="uk-form-controls" id = "genreDropDown">
-                        <select class="uk-select uk-form-width-small" id="form-stacked-select">
-                            <option id="racing">Racing</option>
-                            <option id="shooter">Shooter</option>
-                            <option id="adventure">Adventure</option>
-                            <option id="action">Action</option>
-                            <option id="rpg">RPG</option>
-                            <option id="fighting">fighting</option>
-                        </select>
+        <div class="uk-width-1-4">
+            <div class="uk-card uk-card-default uk-card-body">
+                <form class="uk-form-stacked" id="form">
+                    <div class="uk-margin">
+                        <h3>Search for a game</h3>
+                        <div class="uk-form-label">Platform</div>
+                        <div class="uk-form-controls" id="console_type">
+                            <label><input class="uk-radio" type="radio" name="radio1" id="playstation">
+                                Playstation</label><br>
+                            <label><input class="uk-radio" type="radio" name="radio2" id="xbox"> XBOX</label><br>
+                            <label><input class="uk-radio" type="radio" name="radio3" id="pc"> PC</label><br>
+                        </div>
+
                     </div>
-                </div>
-                <div class="uk-margin">
-                    <div class="uk-form-label">Player</div>
-                    <div class="uk-form-controls" id="player-input">
-                        <label><input class="uk-radio player-num" type="radio" name="radio1" id="singleplayer"> SinglePlayer</label><br>
-                        <label><input class="uk-radio player-num" type="radio" name="radio2" id="multiplayer"> Multiplayer</label><br>
+
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-select">Genre</label>
+                        <div class="uk-form-controls" id="genreDropDown">
+                            <select class="uk-select uk-form-width-small" id="form-stacked-select">
+                                <option id="action">Action</option>
+                                <option id="shooter">Shooter</option>
+                                <option id="racing">Racing</option>
+                                <option id="sports">Sports</option>
+                                <option id="rpg">RPG</option>
+                            </select>
+                        </div>
                     </div>
-                    <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
-                </div>
+                    <div class="uk-margin">
+                        <div class="uk-form-label">Player</div>
+                        <div class="uk-form-controls">
+                            <label><input class="uk-radio" type="radio" name="radio1" id="single">
+                                SinglePlayer</label><br>
+                            <label><input class="uk-radio" type="radio" name="radio2" id="multi">
+                                Multiplayer</label><br>
+                        </div>
+                        <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
+
+                    </div>
+            </div>
             </form>
         </div>
-        <div class="uk-grid">
-            <div class="uk-width-1-2">
-                <div class="uk-container uk-container-xlarge" id="gamequery"></div>
+        <div class="uk-width-1-2">
+            <div class="uk-section uk-section-large uk-section-muted">
+                <div class="uk-container">
+
+                    <h3>Section Large</h3>
+
+                    <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     </div>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="script.js"></script>
-
 </body>
 
 </html>
