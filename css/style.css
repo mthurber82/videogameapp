@@ -1,0 +1,11 @@
+.form{
+  float: right;  
+  width: 200px;
+  background: lightblue;
+
+}
+.query{
+    float: left;
+  width: calc(100% - 200px);
+  background: lightgreen;
+}
