@@ -1,11 +1,7 @@
-.form{
-  float: right;  
-  width: 200px;
-  background: lightblue;
-
+.border{
+  border: red solid 1px;
 }
-.query{
-    float: left;
-  width: calc(100% - 200px);
-  background: lightgreen;
+
+footer{
+  text-align: center;
 }
