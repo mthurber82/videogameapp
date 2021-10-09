@@ -3,11 +3,12 @@ var search = document.getElementById('search');
 var searchParameters = document.getElementById('searchgames');
 var gameInput = document.getElementById('needID');
 var platform = document.getElementById('needID');
-var consoleType = document.getElementById("console_type")
-
+var consoleType = document.getElementById("console_type");
+var players = document.getElementById('player-input');
 var genre = document.getElementById("genreDropDown");
-// var genre = document.getElementById('form-stacked-select');
+var gameSection = document.getElementById("gamequery");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
+
 
 
 // function to create a list of games upon search request
@@ -26,13 +27,22 @@ function searchGames(game) {
         console.log(data)
         //create for loop to increment through each returned search result
         for(var i = 0; i < data.results.length; i++) {
-        //     console.log(data.results[i].name);
-        //     // to do 
-        //     // dynamically create elements here
-        //     // set card values to data results
-        //     // dynamically create buttons for youtube element
-        //     // set youtube attribute to ("target", "_blank")
-        //     // append elements to page
+            if (data.results.length === 0) {
+                //append text box to page saying no results found
+            }
+            else {
+        //        $(`
+        //         <div id="hello-world${i}" class="uk-card uk-card-default uk-child-width-1-2" uk-grid>
+        //         <div class="uk-card-media-left uk-cover-container">
+        //            <img src="" alt="${data.results[i].background_image}" uk-cover>
+        //            <canvas width="" height=""></canvas>
+        //        </div>
+        //        <div>
+        //            <div class="uk-card-body"></div>
+        //        </div>
+        //    </div>`)
+            }
+        
         }
         return data;
     })
@@ -51,7 +61,7 @@ search.addEventListener("click", function() {
 });
 
 
-// console.log(genre);
+
 //drop down
 genre.addEventListener("change", function (e) {
 console.log(e.target.value)
@@ -68,15 +78,90 @@ consoleType.addEventListener("change", function () {
         }
         console.log(array1[i])
     }
-    
-    
+
     return
       
 })
 
 
 
+//listen to changes in the number of players from the search parameter 
+players.addEventListener("change", function() {
+    array2 = [];
+    let plyr = players.getElementsByClassName("player-num");
+    for (var i = 0; i < plyr.length; i++) {
+        if (plyr[i].checked) {
+            array2.push(plyr[i].id);
+        }
+    }
+        choosePlayer(array2);
+});
 
+
+
+// create function to append chosen values to search url
+function choosePlayer(value) {
+    let player1 = null;
+    let player2 = null;
+    let playerArr = [];
+    for( var i=0; i<value.length; i++) {
+        if (value[i] === 'singleplayer') {
+            player1 = '31' // tag id for singleplayer
+            console.log(player1)
+        }
+        if (value[i] === 'multiplayer') {
+            player2 = '7' // tag id for multiplayer
+            console.log(player2)
+        }
+
+    }
+    if (player1 !== null && player2 === null) {
+        playerArr.push(player1)
+    }
+    if (player2 !== null && player1 === null) {
+        playerArr.push(player2)
+    }
+    if (player1 !== null && player2 !== null) {
+        let player3 = player1 + ',' + player2;
+        playerArr.push(player3)
+    }
+    createPlayerURL(playerArr);
+};
+
+// get a list of tags doesnt work
+// fetch('https://api.rawg.io/api/tags?id=singleplayer&key=385f0044190e471aa3e65b5f36e4f71a')
+//     .then(function (response) {
+            
+//         return response.json();
+//     })
+//     //return json response as data
+//     .then(function (data) {
+//     console.log(data)
+//     })
+
+
+function createPlayerURL(playerArr) {
+    console.log(playerArr)
+    var playerSearchURL = `https://api.rawg.io/api/tags/${playerArr}&key=`+key;
+    console.log(playerSearchURL)
+    fetch(playerSearchURL)
+    // return response and convert to json
+    .then(function (response) {
+        
+        return response.json();
+    })
+    //return json response as data
+    .then(function (data) {
+    console.log(data)
+        for (var i=0; i < data.results.length; i++) {
+          //dynamically create more elements here??  
+        }
+        return data;
+    })
+};
+
+searchParameters.addEventListener('click', function() {
+});
 
     // for (let i = 0; i < consoleType.length; i++){
     //     console.log(consoleType[i].id)
@@ -90,46 +175,24 @@ consoleType.addEventListener("change", function () {
 //     });
 //   }
 
+// notes
 
-// var searchGameBtn = document.addEventListener("click", function (event) {
-//     console.log("helo")
-// })
-// grab elements with variables
-// create function to get RAWG api
-// fetch rawg url 
-// then statement
-// create for loop to dynamically create elements
-// create div element
-// create text element
-// create image element?
-// set element content and text
-// add classes to connect with stylesheet of choice
-// dynamically create buttons for youtube element
-// set youtube attribute to ("target", "_blank")
-// append div element to document
-// append text element to div element 
-// append button element to div element 
-// fetch("https://api.rawg.io/api/games?search=vampire-the-masquerade-bloodlines-2&key=" + APIKey)
-//     .then(function (response) {
-        
-        
-//         return response.json();
-        
-      
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//         return data;
-//     })
-    
-    // more code
-//First thing we want to do is create an unqiue ID/class for each selction
-//Than we will need to use document.getElementById/Class to grab the value and store it a local variable in the function
+// genres -->
+// racing:
+// fetch('https://api.rawg.io/api/genres/1?key=385f0044190e471aa3e65b5f36e4f71a')
+// shooter
+// fetch('https://api.rawg.io/api/genres/2?key=385f0044190e471aa3e65b5f36e4f71a')
+// adventure
+// fetch('https://api.rawg.io/api/genres/3?key=385f0044190e471aa3e65b5f36e4f71a')
+// action
+// fetch('https://api.rawg.io/api/genres/4?key=385f0044190e471aa3e65b5f36e4f71a')
+// rpg
+// fetch('https://api.rawg.io/api/genres/5?key=385f0044190e471aa3e65b5f36e4f71a')
+// fighting
+// fetch('https://api.rawg.io/api/genres/6?key=385f0044190e471aa3e65b5f36e4f71a')
 
-//lastly when we the user clicks the submit button (eventlistener) 
-//after the button is click it will send the variable over to a fetch method to send the request
-    //function for getting all the video game parameters
-    
-    //and adding it to fetch method
-
-    
+// tags -->
+// singleplayer:
+// fetch('https://api.rawg.io/api/tags/31?key=385f0044190e471aa3e65b5f36e4f71a')
+// multiplayer:
+// fetch('https://api.rawg.io/api/tags/7?key=385f0044190e471aa3e65b5f36e4f71a')
