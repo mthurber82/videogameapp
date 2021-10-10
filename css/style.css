@@ -18,3 +18,22 @@ body{
 nav{
   
 }
+
+.grid {
+  display: inline-grid;
+  grid-template-rows:300px;
+  grid-template-columns: 250px;
+  margin: 20px;
+}
+
+/* .card-body {
+
+} */
+
+.images {
+  background-size: cover;
+}
+/* 
+.grid :hover {
+
+} */
