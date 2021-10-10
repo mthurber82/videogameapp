@@ -31,37 +31,40 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <form class="uk-form-stacked" id="form">
                     <div class="uk-margin">
-                        <h3>Search for a game</h3>
-                        <div class="uk-form-label">Platform</div>
-                        <div class="uk-form-controls" id="console_type">
-                            <label><input class="uk-radio" type="radio" name="radio1" id="playstation">
-                                Playstation</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio2" id="xbox"> XBOX</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio3" id="pc"> PC</label><br>
+                        <h3>Search for a Game</h3>
+                        <label class="uk-form-label" for="form-stacked-select">Platform</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select uk-form-width-small platformDropDown" id="form-stacked-select">
+                                <option  value="" disabled selected hidden>Platform</option>
+                                <option id="playstation">PlayStation</option>
+                                <option id="xbox">Xbox</option>
+                                <option id="pc">PC</option>
+                            </select>
                         </div>
-
                     </div>
-
 
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-select">Genre</label>
-                        <div class="uk-form-controls" id="genreDropDown">
-                            <select class="uk-select uk-form-width-small" id="form-stacked-select">
-                                <option id="action">Action</option>
-                                <option id="shooter">Shooter</option>
-                                <option id="racing">Racing</option>
-                                <option id="sports">Adventure</option>
-                                <option id="rpg">RPG</option>
+                        <div class="uk-form-controls" >
+                            <select class="uk-select uk-form-width-small genreDropDown" id="form-stacked-select">
+                                <option value="" disabled selected hidden>Genre</option>
+                                <option id="Action">Action</option>
+                                <option id="Shooter">Shooter</option>
+                                <option id="Racing">Racing</option>
+                                <option id="Adventure">Adventure</option>
+                                <option id="RPG">RPG</option>
+                                <option id="Fighting">Fighting</option>
                             </select>
                         </div>
                     </div>
                     <div class="uk-margin">
-                        <div class="uk-form-label" id="player-input" >Player</div>
+                        <label class="uk-form-label" for="form-stacked-select">Player</label>
                         <div class="uk-form-controls">
-                            <label><input class="uk-radio" type="radio" name="radio1" id="single">
-                                SinglePlayer</label><br>
-                            <label><input class="uk-radio" type="radio" name="radio2" id="multi">
-                                Multiplayer</label><br>
+                            <select class="uk-select uk-form-width-small playerDropDown" id="form-stacked-select">
+                                <option value="" disabled selected hidden>Player</option>
+                                <option id="singleplayer">Singleplayer</option>
+                                <option id="multiplayer">Multiplayer</option>
+                            </select>
                         </div>
                         <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
 
@@ -71,27 +74,19 @@
         </div>
         <div class="uk-width-3-4">
             <div class="uk-section uk-section-large uk-section-muted">
-                <div class="uk-container">
+                <div class="uk-container" id="gamequery">
 
-                    <h3>Section Large</h3>
-
-                    <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                        </div>
-                    </div>
+                    <h3>Game Query</h3>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    <footer>footer</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
+
+</html>
 
 </html>

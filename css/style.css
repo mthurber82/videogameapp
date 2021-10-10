@@ -4,4 +4,36 @@
 
 footer{
   text-align: center;
+  
 }
+body{
+  background-image: url("../assets/js/img/537089.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gamequery{
+  opacity: .5;
+}
+nav{
+  
+}
+
+.grid {
+  display: inline-grid;
+  grid-template-rows:300px;
+  grid-template-columns: 250px;
+  margin: 20px;
+}
+
+/* .card-body {
+
+} */
+
+.images {
+  background-size: cover;
+}
+/* 
+.grid :hover {
+
+} */
