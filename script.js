@@ -1,17 +1,15 @@
 // grab elements with variables
 var search = document.getElementById('search');
 var searchParameters = document.getElementById('searchgames');
-var gameInput = document.getElementById('needID');
-var platform = document.getElementById('needID');
-var consoleType = document.getElementById("console_type");
-var players = document.getElementById('player-input');
-var genre = document.getElementById("genreDropDown");
+var gameInput = document.getElementById('userimput');
+var platform = document.getElementsByClassName("platformDropDown");
+var players = document.getElementsByClassName('playerDropDown');
+var genre = document.getElementsByClassName("genreDropDown");
 var gameSection = document.getElementById("gamequery");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
-var globalConsole = [];
+var globalPlatform = [];
 var globalPlayers = [];
 var globalGenre = [];
-
 // function to create a list of games upon search request
 function searchGames(game) {
     // url variable
@@ -19,7 +17,6 @@ function searchGames(game) {
     fetch(gameSearchURL)
     // return response and convert to json
         .then(function (response) {
-        
         return response.json();
     })
     //return json response as data
@@ -27,107 +24,74 @@ function searchGames(game) {
         // console.log(data)
         //create for loop to increment through each returned search result
         for(var i = 0; i < data.results.length; i++) {
-            if (data.results.length === 0) {
-                //append text box to page saying no results found
-            }
-            else {
-        //        $(`
-        //         <div id="hello-world${i}" class="uk-card uk-card-default uk-child-width-1-2" uk-grid>
-        //         <div class="uk-card-media-left uk-cover-container">
-        //            <img src="" alt="${data.results[i].background_image}" uk-cover>
-        //            <canvas width="" height=""></canvas>
-        //        </div>
-        //        <div>
-        //            <div class="uk-card-body"></div>
-        //        </div>
-        //    </div>`)
-            }
-        
+            // if (data.results.length === 0) {
+            //     //append text box to page saying no results found
+            // }
+            // else {
+                var cardElements =
+               $(`<p>hello world</p>`)
+            // gameSection.appendChild(cardElements)
+            // }
+            gameSection.append(cardElements);
+            console.log(cardElements)
         }
         return data;
     })
 };
-
 // add event listener to main search button
 search.addEventListener("click", function() {
-    // create variable for user search input
-    // var game = gameInput.value;
     let user_input = document.getElementById("userinput")
     // console.log(user_input.value)
     let game = user_input.value
-    // return function with user search input
     searchGames(game);
 });
-
-
-//drop down
-genre.addEventListener("change", function (e) {
-    // console.log(e.target.value)
-    globalGenre.push(e.target.value);
-})
-
-//Radio button
-consoleType.addEventListener("change", function () {
-    // array1 = []
-    let temp =consoleType.getElementsByClassName("uk-radio")
-    for (let i = 0; i < temp.length; i++) {
-        if (temp[i].checked) {
-            // globalConsole.push(temp[i].id)
-            
-        }
-        // console.log(globalConsole[i])
+//drop down event listeners:
+// genre value function
+function genreSelect() {
+    globalGenre.push($('.genreDropDown :selected').text());
+    console.log(globalGenre[0]);
+}
+function playerSelect() {
+    if($('.playerDropDown :selected').text() === 'Singleplayer') {
+        globalPlayers.push(31);
     }
-    return
-})
-
-
-//listen to changes in the number of players from the search parameter 
-players.addEventListener("change", function() {
-    let plyr = players.getElementsByClassName("player-num");
-    for (var i = 0; i < plyr.length; i++) {
-        if (plyr[i].checked) {
-            globalPlayers.push(plyr[i].id);
-        }
+    if ($('.playerDropDown :selected').text() === 'Multiplayer') {
+        globalPlayers.push(7);
     }
-});
-
-
-function gameArray() {
+    console.log(globalPlayers[0]);
+}
+function platformSelect() {
+    globalPlatform.push($('.platformDropDown :selected').text());
+    console.log(globalPlatform[0]);
+}
+function gameArrayFunction() {
     // console.log()
     let gameArray = [];
     let temp = [];
-
+    // console.log('first')
     for (var i=1; i <= 4; i++) {
-
-        var fetchPages = 'https://api.rawg.io/api/games?page_size=40&page='+i+'&key=385f0044190e471aa3e65b5f36e4f71a'
-
+        var fetchPages = 'https://api.rawg.io/api/games?page_size=40&page='+i+'&key='+key
+        // console.log('second')
         fetch(fetchPages)
-        
         .then(function (response) {
-                
+            // console.log('third')
             return response.json();
         })
         //return json response as data
         .then(function (data) {
-
+        // console.log('fourth')
          //console.log(data)
         gameArray = gameArray.concat(data.results)
-
+        console.log(gameArray)
         console.log(arrayFunction(gameArray));
-
         temp.push(arrayFunction(gameArray))
-
         })
-        
     }
-    console.log
+    // console.log(temp[3][1])
 }
-
+gameArrayFunction();
 function arrayFunction(filterArray) {
-
-    var genreValue = "RPG"
-    var userPlatfolmChoice = "Xbox";
-    var userPlayerChoice = 31;
+    // console.log('last hope')
             // var containsThisGenre = false;
         // for (let i = 0; i < game.genres.length; i ++) {
         //     if (game.genres[i].name === genreValue) {
@@ -137,50 +101,48 @@ function arrayFunction(filterArray) {
         // return containsThisGenre;
         // console.log(game.genres);
         // console.log(game.genres.map(g => g.name))
-
-    var userChoiceArr = filterArray.filter(game => game.genres.map(g => g.name).includes(genreValue))
-    .filter(game => game.parent_platforms.map(g => g.platform.name).includes(userPlatfolmChoice))
-    .filter(game => game.tags.map(g => g.id).includes(userPlayerChoice))
-                            // .filter(game => game.parent_platforms.filter(platform => platform.name == userPlatfolmChoice))
-                            // .filter(game => game.tags.filter(players => players.name == userPlayerChoice)
-
+    if (globalGenre[0] !== null) {
+        var userChoiceArr = filterArray.filter(game => game.genres.map(g => g.name).includes(globalGenre[0]))
+        .filter(game => game.parent_platforms.map(g => g.platform.name).includes(globalPlatform[0]))
+        .filter(game => game.tags.map(g => g.id).includes(globalPlayers[0]))
+    }
+    else {
+        // console.log("hi")
+    }
+    // console.log("hello world")
+    // console.log(userChoiceArr);
     return userChoiceArr;
 }
-
-
     // var playerSearchURL = `https://api.rawg.io/api/tags/${playerArr}&key=`+key;
-
     // fetch(playerSearchURL)
     // .then(function (response) {
-        
     //     return response.json();
     // })
     // //return json response as data
     // .then(function (data) {
     // console.log(data)
     //     for (var i=0; i < data.results.length; i++) {
-    //       //dynamically create more elements here??  
+    //       //dynamically create more elements here??
     //     }
 //     //     return data;
 //     })
 // };
-
-searchParameters.addEventListener('click', gameArray())
-
+searchParameters.addEventListener('click', function() {
+    genreSelect();
+    playerSelect();
+    platformSelect();
+    gameArrayFunction();
+})
     // for (let i = 0; i < consoleType.length; i++){
     //     console.log(consoleType[i].id)
     // }
-  
-
 // for (let i = 0; i < consoleType.length; i++) {
 //     consoleType[i].addEventListener("change", function() {
 //       let val = this.value; // this == the clicked radio,
 //       console.log(val);
 //     });
 //   }
-
 // notes
-
 // genres -->
 // racing:
 // fetch('https://api.rawg.io/api/genres/1?key=385f0044190e471aa3e65b5f36e4f71a')
@@ -194,16 +156,13 @@ searchParameters.addEventListener('click', gameArray())
 // fetch('https://api.rawg.io/api/genres/5?key=385f0044190e471aa3e65b5f36e4f71a')
 // fighting
 // fetch('https://api.rawg.io/api/genres/6?key=385f0044190e471aa3e65b5f36e4f71a')
-
 // tags -->
 // singleplayer:
 // fetch('https://api.rawg.io/api/tags/31?key=385f0044190e471aa3e65b5f36e4f71a')
 // multiplayer:
 // fetch('https://api.rawg.io/api/tags/7?key=385f0044190e471aa3e65b5f36e4f71a')
-
 // platforms -->
 // fetch('https://api.rawg.io/api/platforms/4?key=385f0044190e471aa3e65b5f36e4f71a')
-
 // create function to append chosen values to search url
 // function choosePlayer(value) {
 //     let player1 = null;
@@ -218,7 +177,6 @@ searchParameters.addEventListener('click', gameArray())
 //             player2 = '7' // tag id for multiplayer
 //             console.log(player2)
 //         }
-
 //     }
     // if (player1 !== null && player2 === null) {
     //     playerArr.push(player1)
