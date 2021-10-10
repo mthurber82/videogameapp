@@ -8,11 +8,54 @@ var genre = document.getElementsByClassName("genreDropDown")[0];
 var gameSection = document.getElementById("gamequery");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 
+var favoriteButton;
 var globalPlatform;
 var globalGenre;
 var globalPlayers;
 var temp = [];
 
+function baseCards() {
+    
+
+    var gameURL = 'https://api.rawg.io/api/games?&key='+key;
+    fetch(gameURL) 
+
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        for(var i = 0; i < data.results.length; i++) {
+                var htmltag = `
+                <div class="uk-card uk-card-default game-card">
+                    <div class="uk-card-media-top">
+                        <img src='${data.results[i].background_image}'"></img>
+                    </div>
+                <div class="uk-card-body">
+                    <button class="add-favorite">+</button>
+                    <h4>${data.results[i].name}</h4>
+                    <div class="hidden">
+                        <p class="card-item">Rating: ${data.results[i].rating}</p>
+                        <button class="ytube-button">YouTube</button>
+                    </div>
+                </div>
+                </div>`
+            
+                var test = document.createElement('div')
+                test.classList.add('grid')
+                test.innerHTML = htmltag
+                gameSection.appendChild(test)
+                
+                
+        }
+        favoriteButton = document.querySelector('.add-favorite');
+        
+    })
+};
+baseCards();
+
+favoriteButton.addEventListener('click', function(e) {
+    console.log(e.target.parentNode.parentNode);
+})
 // function to create a list of games upon search request
 function searchGames(game) {
     // url variable
@@ -32,16 +75,19 @@ function searchGames(game) {
             //     noResult.textContent = "No Results Found."
             //     gameSection.appendChild(noResults)
             // }
-
             // else {
                 var htmltag = `
-                <div class="uk-card uk-card-default">
+                <div class="uk-card uk-card-default game-card">
                     <div class="uk-card-media-top">
                         <img src='${data.results[i].background_image}'"></img>
                     </div>
                 <div class="uk-card-body">
+                    <button class="add-favorite">+</button>
                     <h4>${data.results[i].name}</h4>
-                    <p>Rating:${data.results[i].rating}</p>
+                    <div class="hidden">
+                        <p class="card-item">Rating: ${data.results[i].rating}</p>
+                        <button class="ytube-button">YouTube</button>
+                    </div>
                 </div>
                 </div>`
             
@@ -50,26 +96,17 @@ function searchGames(game) {
                 test.innerHTML = htmltag
                 gameSection.appendChild(test)
             // }   
-                // var card = document.createElement('div')
-                // gameSection.appendChild(ptag)
-            
-    
-
-//<div class="uk-card uk-card-default">
-//   <div class="uk-card-media-top">
-//     <img src="" alt="">
-//   </div>
-// <div class="uk-card-body"></div>
-// </div>
         }
         return data;
     })
 };
 
+
+
 // add event listener to main search button
 search.addEventListener("click", function() {
     //reset game card elements by reloading the page
-   
+    
 
     let user_input = document.getElementById("userinput")
     // console.log(user_input.value)
