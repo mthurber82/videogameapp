@@ -35,8 +35,11 @@ function baseCards() {
                     <h4>${data.results[i].name}</h4>
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
+                        <button class="reddit-button">Reddit</button>
                         <button class="ytube-button">YouTube</button>
+                        <p class="always-hidden">${data.results[i].id}</p>
                     </div>
+
                 </div>
                 </div>`
             
@@ -53,9 +56,9 @@ function baseCards() {
 };
 baseCards();
 
-favoriteButton.addEventListener('click', function(e) {
-    console.log(e.target.parentNode.parentNode);
-})
+// favoriteButton.addEventListener('click', function(e) {
+//     console.log(e.target.parentNode.parentNode);
+// })
 // function to create a list of games upon search request
 function searchGames(game) {
     // url variable
