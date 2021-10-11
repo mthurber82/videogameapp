@@ -13,9 +13,12 @@ body{
 }
 
 .gamequery{
-  opacity: 100%;
+  opacity: .005%;
 }
 
+.gamequery ul {
+  list-style: none;
+}
 /* nav{
   
 } */
