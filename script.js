@@ -6,6 +6,7 @@ var platform = document.getElementsByClassName("platformDropDown")[0];
 var players = document.getElementsByClassName('playerDropDown')[0];
 var genre = document.getElementsByClassName("genreDropDown")[0];
 var gameSection = document.getElementById("gamequery");
+var favoritesSection = document.getElementById("favorites");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 
 var favoriteButton;
@@ -16,7 +17,6 @@ var temp = [];
 var favoriteButtonArray = [];
 
 function baseCards() {
-    
 
     var gameURL = 'https://api.rawg.io/api/games?&key='+key;
     fetch(gameURL) 
@@ -33,22 +33,20 @@ function baseCards() {
                     </div>
                 <div class="uk-card-body">
                     <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
-                    
+                    <h4 class="card-title">${data.results[i].name}</h4>
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
+                        <p class="card-item">Released: ${data.results[i].released}</p>
                         <button class="reddit-button">Reddit</button>
                         <button class="ytube-button">YouTube</button>
-                        <p class="always-hidden">${data.results[i].id}</p>
                     </div>
-
                 </div>
                 </div>`
             
-                var test = document.createElement('div')
-                test.classList.add('grid')
-                test.innerHTML = htmltag
-                gameSection.appendChild(test)
-                
+                var test = document.createElement('div');
+                test.classList.add('grid');
+                test.innerHTML = htmltag;
+                gameSection.appendChild(test);
                 
         }
         // favoriteButton = document.querySelector('.add-favorite');
@@ -57,23 +55,50 @@ function baseCards() {
 };
 baseCards();
 
+
+
+
+
+function gameTabs(evt, gameTab) {
+    
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+    document.getElementById(gameTab).style.display = "block";
+    evt.currentTarget.className += "active";
+  }
+
 function checks() {
     // favoriteButton = document.querySelector('.add-favorite');
-    
     gameSection.addEventListener('click', function (e) {
        
         if (e.target.getAttribute("data-attrid") === "" || e.target.getAttribute("data-attrid") === null) {
-            console.log(e.target)
+            // console.log(e.target)
           
         } else {
-            let fTemp = localStorage.setItem("items", favoriteButtonArray)
-            console.log(favoriteButtonArray);
+            let fTemp = localStorage.setItem("favorites", favoriteButtonArray)
+            // console.log(favoriteButtonArray);
             favoriteButtonArray.push(e.target.getAttribute("data-attrid"))
+            favoriteFunction();
         }
-})
-
+    })
 }
 
+function favoriteFunction() {
+    favArray = localStorage.getItem('favorites');
+    console.log(JSON.parse(favArray))
+    for (var i=0; i<favArray.length; i++) {
+        var favURL = 'https://api.rawg.io/api/games?'+favArray[i]+'&key='+key;
+    }
+}
+
+favoriteFunction();
 // favoriteButton.addEventListener('click', function(e) {
 //     console.log(e.target.parentNode.parentNode);
 // })
@@ -147,7 +172,7 @@ players.addEventListener("change", function() {
         var storedPlayers = localStorage.setItem('players', 31);
     }
     if (localPlayers === 'Multiplayer') {
-        var storedPlayers = localStorage.setItem('players', 31);
+        var storedPlayers = localStorage.setItem('players', 7);
     }
 })
 
@@ -160,7 +185,7 @@ genre.addEventListener("change", function() {
 function gameArrayFunction() {
     // console.log()
     let gameArray = [];
-    console.log('first')
+    // console.log('first')
     for (var i=1; i <= 4; i++) {
         var fetchPages = 'https://api.rawg.io/api/games?page_size=40&page='+i+'&key='+key
 
@@ -189,12 +214,13 @@ function arrayFunction(filterArray) {
     // var globalPlatform1 = "Xbox";
     // var globalPlayers1 = 31;
 
-    console.log(globalPlatform1, globalGenre1, globalPlayers1);
+    // console.log(globalPlatform1, globalGenre1, globalPlayers1);
     
     var userChoiceArr = filterArray.filter(game => game.genres.map(g => g.name).includes(globalGenre1))
     .filter(game => game.parent_platforms.map(g => g.platform.name).includes(globalPlatform1))
-    // .filter(game => game.tags.map(g => g.id).includes(globalPlayers1))
-    console.log(userChoiceArr);
+    // .filter(game => game.tags.map(g => g.id).includes(globalPlayers1));
+
+    // console.log(userChoiceArr);
     // console.log("hello world")
     return userChoiceArr;
 } 

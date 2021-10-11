@@ -2,15 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <!-- <script src="./css/uikit.min.css"></script> -->
-    <!-- <script src="./css/uikit-rtl.css"></script> -->
-    <!-- <script src="./css/uikit-icons.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <title>VideoGameAPP</title>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <title>GG</title>
 </head>
 
 <body>
@@ -27,8 +24,8 @@
     </nav>
     <div class="uk-grid">
 
-        <div class="uk-width-1-4">
-            <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-width-1-4 side-search">
+            <div class="uk-card uk-card-default uk-card-body side-search-body side-search">
                 <form class="uk-form-stacked" id="form">
                     <div class="uk-margin">
                         <h3>Search for a Game</h3>
@@ -42,7 +39,7 @@
                             </select>
                         </div>
                     </div>
-
+                    
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-select">Genre</label>
                         <div class="uk-form-controls" >
@@ -65,7 +62,7 @@
                                 <option id="singleplayer">Singleplayer</option>
                                 <option id="multiplayer">Multiplayer</option>
                             </select>
-                        </div>
+                        </div><br>
                         <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
 
                     </div>
@@ -74,18 +71,31 @@
         </div>
         <div class="uk-width-3-4">
             <div class="uk-section uk-section-large uk-section-muted">
-                <div class="uk-container" id="gamequery">
+                <div class="tab">
+                    <button class="tablinks" onclick="gameTabs(event, 'gamequery')">Games</button>
+                    <button class="tablinks" onclick="gameTabs(event, 'favorites')">Favorites⭐</button>
+                </div>
+                <div class="uk-container">
+                    <!-- Tab content -->
+                <div id="gamequery" class="tabcontent" style="display: block;">
                     <h4>Game Query</h4>
+                </div>
+                <div id="favorites" class="tabcontent" style="display: none;">
+                    <h4>Favorites</h4>
+                </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     </div>
-    <footer>footer</footer>
+    
+    <script src="assets/js/uikit.min.js"></script>
+    <script src="assets/js/uikit-icons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
-
+<footer>footer</footer>
 </html>
 
 </html>
