@@ -13,6 +13,7 @@ var globalPlatform;
 var globalGenre;
 var globalPlayers;
 var temp = [];
+var favoriteButtonArray = [];
 
 function baseCards() {
     
@@ -31,8 +32,8 @@ function baseCards() {
                         <img src='${data.results[i].background_image}'"></img>
                     </div>
                 <div class="uk-card-body">
-                    <button class="add-favorite">+</button>
-                    <h4>${data.results[i].name}</h4>
+                    <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
+                    
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
                         <button class="reddit-button">Reddit</button>
@@ -50,11 +51,28 @@ function baseCards() {
                 
                 
         }
-        favoriteButton = document.querySelector('.add-favorite');
-        
+        // favoriteButton = document.querySelector('.add-favorite');
+        checks()
     })
 };
 baseCards();
+
+function checks() {
+    // favoriteButton = document.querySelector('.add-favorite');
+    
+    gameSection.addEventListener('click', function (e) {
+       
+        if (e.target.getAttribute("data-attrid") === "" || e.target.getAttribute("data-attrid") === null) {
+            console.log(e.target)
+          
+        } else {
+            let fTemp = localStorage.setItem("items", favoriteButtonArray)
+            console.log(favoriteButtonArray);
+            favoriteButtonArray.push(e.target.getAttribute("data-attrid"))
+        }
+})
+
+}
 
 // favoriteButton.addEventListener('click', function(e) {
 //     console.log(e.target.parentNode.parentNode);
@@ -84,9 +102,10 @@ function searchGames(game) {
                     <div class="uk-card-media-top">
                         <img src='${data.results[i].background_image}'"></img>
                     </div>
-                <div class="uk-card-body">
+                <div class="uk-card-body" >
                     <button class="add-favorite">+</button>
-                    <h4>${data.results[i].name}</h4>
+                    <h4 id>${data.results[i].name}</h4>
+                    
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
                         <button class="ytube-button">YouTube</button>
@@ -118,12 +137,12 @@ search.addEventListener("click", function() {
 });
 
 platform.addEventListener("change", function () {
-    localPlatform = $('.platformDropDown :selected').text();
+    let localPlatform = $('.platformDropDown :selected').text();
     var storedPlatform = localStorage.setItem('platform', localPlatform);
 })
 
 players.addEventListener("change", function() {
-    localPlayers = $('.playerDropDown :selected').text();
+     let localPlayers = $('.playerDropDown :selected').text();
     if (localPlayers === 'Singleplayer') {
         var storedPlayers = localStorage.setItem('players', 31);
     }
@@ -133,7 +152,7 @@ players.addEventListener("change", function() {
 })
 
 genre.addEventListener("change", function() {
-    localGenre = $('.genreDropDown :selected').text();
+    let localGenre = $('.genreDropDown :selected').text();
     var storedGenre = localStorage.setItem('genre', localGenre);
 })
 
