@@ -4,31 +4,23 @@
 
 footer{
   text-align: center;
-  
 }
+
 body{
-  background-image: url("../assets/js/img/537089.jpg");
+  background-color:rgb(38, 38, 39);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .gamequery{
-  opacity: 100%;
+  opacity: 0.05%;
 }
-
-/* nav{
-  
-} */
 
 .grid {
   display: inline-grid;
   grid-template-columns: 250px;
   margin: 20px;
 }
-
-/* .card-body {
-
-} */
 
 .images {
   background-size: cover;
@@ -44,12 +36,12 @@ body{
   border-radius: 15px;
 }
 
-.game-card img {
-  border-radius: 10px 10px 0px 0px;
-}
-
 .game-card h4 {
   color: white;
+}
+
+.card-item {
+ line-height: 2px;
 }
 
 .hidden {
@@ -58,6 +50,13 @@ body{
 
 .game-card:hover .hidden{
   display: inline-block;
+}
+
+.add-favorite {
+  background-color: rgb(52, 54, 56);
+  color: white;
+  border-radius: 5px;
+  float: top left;
 }
 
 .ytube-button {
@@ -82,4 +81,26 @@ body{
 
 .ytube-button:hover {
   background-color: rgb(163, 38, 16);
+}
+
+.side-search {
+  background-color: rgb(52, 54, 56);
+}
+
+.side-search-body {
+  position: fixed;
+  background-color: rgb(62, 64, 66);
+  color: white;
+}
+
+.side-search-body h3 {
+  color: white;
+}
+
+.side-search-body label {
+  color: white;
+}
+
+.games-display {
+  background-color: black;
 }
