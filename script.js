@@ -90,7 +90,11 @@ function checks() {
 
 
 
-// basecard function to create popular game cards as default upon loading the page
+
+
+
+
+// function to create popular game cards as default upon loading the page
 function baseCards() {
     // fetching random games using RAWG url
     var gameURL = 'https://api.rawg.io/api/games?&key='+key;
@@ -101,30 +105,7 @@ function baseCards() {
     })
     // then statement to input data into a for loop
     .then(function (data) {
-        for(var i = 0; i < data.results.length; i++) {
-            // create game cards using for loop and passing through data into html elements to appended them to the page.
-                var htmltag = `
-                <div class="uk-card uk-card-default game-card">
-                    <div class="uk-card-media-top">
-                        <img src='${data.results[i].background_image}'"></img>
-                </div>
-                <div class="uk-card-body">
-                    <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
-                    <h4 class="card-title">${data.results[i].name}</h4>
-                    <div class="hidden">
-                        <p class="card-item">Rating: ${data.results[i].rating}</p>
-                        <p class="card-item">Released: ${data.results[i].released}</p>
-                        <button class="reddit-button">Reddit</button>
-                        <button class="ytube-button">YouTube</button>
-                    </div>
-                </div>
-                </div>`
-            // append card elelemts to the page
-                var cardEl = document.createElement('div');
-                cardEl.classList.add('grid');
-                cardEl.innerHTML = htmltag;
-                gameSection.appendChild(cardEl);
-        }
+        gameCards(data);
         // run function checks to add game card to local storage upon clicking the plus/favorites button
         checks()
     })
@@ -178,7 +159,32 @@ function favoriteFunction() {
 // call favorite function upon loading of the page
 favoriteFunction();
 
-
+function gameCards(data) {
+    for(var i = 0; i < data.results.length; i++) {
+        // create game cards using for loop and passing through data into html elements to appended them to the page.
+            var htmltag = `
+            <div class="uk-card uk-card-default game-card">
+                <div class="uk-card-media-top">
+                    <img src='${data.results[i].background_image}'"></img>
+            </div>
+            <div class="uk-card-body">
+                <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
+                <h4 class="card-title">${data.results[i].name}</h4>
+                <div class="hidden">
+                    <p class="card-item">Rating: ${data.results[i].rating}</p>
+                    <p class="card-item">Released: ${data.results[i].released}</p>
+                    <button class="reddit-button">Reddit</button>
+                    <button class="ytube-button">YouTube</button>
+                </div>
+            </div>
+            </div>`
+        // append card elelemts to the page
+            var cardEl = document.createElement('div');
+            cardEl.classList.add('grid');
+            cardEl.innerHTML = htmltag;
+            gameSection.appendChild(cardEl);
+    }
+}
 
 function searchGames(game) {
     // url variable
@@ -283,3 +289,5 @@ searchParameters.addEventListener('click', gameArrayFunction());
         // return containsThisGenre;
         // console.log(game.genres);
         // console.log(game.genres.map(g => g.name))
+
+        console.log('hello world')
