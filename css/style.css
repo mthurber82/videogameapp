@@ -104,3 +104,13 @@ body{
 .games-display {
   background-color: black;
 }
+
+.tab {
+  float: right;
+  padding: 20px;
+  padding-left: 55%
+}
+.tablinks {
+  border: none;
+  padding: 10px;
+}
