@@ -115,27 +115,28 @@ function filterDuplicates(data) {
 }
 
 function favoriteFunction() {
-   favArray = favoriteButtonArray[0]
+//    favArray = favoriteButtonArray[0]
     favArray = localStorage.getItem('favorites');
     let tempi = JSON.parse(favArray)
     console.log(JSON.parse(tempi))
     let tempArray1 = []
-    for (var i=0; i<tempi.length; i++) {
-        var favURL = 'https://api.rawg.io/api/games/'+tempi[i]+'?&key=' + key;
-        fetch(favURL) 
-        // console.log(favURL)
+    if(tempi !== null && tempi.length !== 0){
+        for (var i = 0; i < tempi.length; i++) {
+            var favURL = 'https://api.rawg.io/api/games/' + tempi[i] + '?&key=' + key;
+            fetch(favURL)
+                // console.log(favURL)
 
-            .then(function (response) {
+                .then(function (response) {
                 
-            return response.json();
-        })
-            .then(function (data) {
+                    return response.json();
+                })
+                .then(function (data) {
 
-                tempArray1.push(data)
-                // console.log(tempArray1[0])
+                    tempArray1.push(data)
+                    // console.log(tempArray1[0])
               
-            for(var i = 0; i < tempArray1.length; i++) {
-                    var htmltag = `
+                    for (var i = 0; i < tempArray1.length; i++) {
+                        var htmltag = `
                     <div class="uk-card uk-card-default game-card">
                         <div class="uk-card-media-top">
                             <img src='${tempArray1[i].background_image}'></img>
@@ -151,16 +152,17 @@ function favoriteFunction() {
                     </div>
                     </div>`
                 
-                    var test = document.createElement('div');
-                    test.classList.add('grid');
-                test.innerHTML = htmltag;
-                // console.log(test)
-                favoritesSection.appendChild(test);
+                        var test = document.createElement('div');
+                        test.classList.add('grid');
+                        test.innerHTML = htmltag;
+                        // console.log(test)
+                        favoritesSection.appendChild(test);
                 
-                // console.log(favoritesSection)
+                        // console.log(favoritesSection)
                     
-            }
-        })
+                    }
+                })
+        }
     }
 }
 // favoriteFunction();
