@@ -14,7 +14,6 @@ var globalPlatform;
 var globalGenre;
 var globalPlayers;
 var temp = [];
-let arrayNew = new Set()
 var favoriteButtonArray = [];
 
 function baseCards() {
@@ -44,107 +43,73 @@ function baseCards() {
                 </div>
                 </div>`
             
-                var test = document.createElement('div');
-                test.classList.add('grid');
-                test.innerHTML = htmltag;
-                gameSection.appendChild(test);
-                
+                var cardEl = document.createElement('div');
+                cardEl.classList.add('grid');
+                cardEl.innerHTML = htmltag;
+                gameSection.appendChild(cardEl);
         }
-        
+        checks()
     })
 };
-
-
+baseCards();
 
 
 function gameTabs(evt, gameTab) {
-    checks()
-    baseCards();
+    
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+      tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace("active", "");
+      tablinks[i].className = tablinks[i].className.replace("active", "");
     }
     document.getElementById(gameTab).style.display = "block";
-    evt.currentTarget.classList.add("active") 
-    console.log("----gg----")
-    if (evt.target.classList[1] === "active") {
-        console.log("--------")
-        
-        favoriteFunction()
-       
-      }
-}
+    evt.currentTarget.className += "active";
+  }
+
 function checks() {
     // favoriteButton = document.querySelector('.add-favorite');
     gameSection.addEventListener('click', function (e) {
-        
-        
-        if (e.target.getAttribute("data-attrid") === "" || e.target.getAttribute("data-attrid") === null) {
-            console.log(e.target)
-        } else {
-            favoriteButtonArray.push(e.target.getAttribute("data-attrid"))
-           let filterVar = filterDuplicates(favoriteButtonArray)
-                localStorage.setItem("favorites", JSON.stringify(filterVar))
-                console.log(filterVar);
-            
-            
        
-            // favoriteButtonArray.push(tempArray4)
-  
-            
+        if (e.target.getAttribute("data-attrid") === "" || e.target.getAttribute("data-attrid") === null) {
+            // console.log(e.target)
+        } else {
+            let fTemp = localStorage.setItem("favorites", JSON.stringify(favoriteButtonArray))
+            // console.log(favoriteButtonArray);
+            favoriteButtonArray.push(e.target.getAttribute("data-attrid"))
         }
     })
 }
 
-function filterDuplicates(data) {
-    
-    let somethin = data.filter(function (value, index) {
-        console.log(data.indexOf(value) === index)
-        return data.indexOf(value) === index;
-
-        
-    });
-
-    console.log(somethin)
-    return somethin
-}
 
 function favoriteFunction() {
-   favArray = favoriteButtonArray[0]
+    // favArray = favoriteButtonArray[0]
     favArray = localStorage.getItem('favorites');
     let tempi = JSON.parse(favArray)
-    console.log(JSON.parse(tempi))
-    let tempArray1 = []
+    console.log(JSON.parse(favArray))
     for (var i=0; i<tempi.length; i++) {
         var favURL = 'https://api.rawg.io/api/games/'+tempi[i]+'?&key=' + key;
         fetch(favURL) 
         // console.log(favURL)
 
-            .then(function (response) {
-                
+        .then(function (response) {
             return response.json();
         })
-            .then(function (data) {
-
-                tempArray1.push(data)
-                // console.log(tempArray1[0])
-              
-            for(var i = 0; i < tempArray1.length; i++) {
+        .then(function (data) {
+            for(var i = 0; i < data.length; i++) {
                     var htmltag = `
                     <div class="uk-card uk-card-default game-card">
                         <div class="uk-card-media-top">
-                            <img src='${tempArray1[i].background_image}'></img>
+                            <img src='${data.results[i].background_image}'"></img>
                         </div>
                     <div class="uk-card-body">
-                        <h4 class="card-title">${tempArray1[i].name}</h4>
+                        <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
+                        <h4 class="card-title">${data.results[i].name}</h4>
                         <div class="hidden">
-                            <p class="card-item">Rating: ${tempArray1[i].rating}</p>
-                            <p class="card-item">Released: ${tempArray1[i].released}</p>
+                            <p class="card-item">Rating: ${data.results[i].rating}</p>
+                            <p class="card-item">Released: ${data.results[i].released}</p>
                             <button class="reddit-button">Reddit</button>
                             <button class="ytube-button">YouTube</button>
                         </div>
@@ -153,17 +118,14 @@ function favoriteFunction() {
                 
                     var test = document.createElement('div');
                     test.classList.add('grid');
-                test.innerHTML = htmltag;
-                // console.log(test)
-                favoritesSection.appendChild(test);
-                
-                // console.log(favoritesSection)
+                    test.innerHTML = htmltag;
+                    favoritesSection.appendChild(test);
                     
             }
         })
     }
 }
-// favoriteFunction();
+favoriteFunction();
 
 function searchGames(game) {
     // url variable
@@ -188,12 +150,13 @@ function searchGames(game) {
                     <div class="uk-card-media-top">
                         <img src='${data.results[i].background_image}'"></img>
                     </div>
-                <div class="uk-card-body" >
-                    <button class="add-favorite">+</button>
-                    <h4 id>${data.results[i].name}</h4>
-                    
+                <div class="uk-card-body">
+                    <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
+                    <h4 class="card-title">${data.results[i].name}</h4>
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
+                        <p class="card-item">Released: ${data.results[i].released}</p>
+                        <button class="reddit-button">Reddit</button>
                         <button class="ytube-button">YouTube</button>
                     </div>
                 </div>
@@ -211,9 +174,8 @@ function searchGames(game) {
 
 // add event listener to main search button
 search.addEventListener("click", function() {
-    //reset game card elements by reloading the page
+    //reset game card elements
     
-
     let user_input = document.getElementById("userinput")
     // console.log(user_input.value)
     let game = user_input.value
@@ -279,7 +241,7 @@ function arrayFunction(filterArray) {
     .filter(game => game.parent_platforms.map(g => g.platform.name).includes(globalPlatform1))
     // .filter(game => game.tags.map(g => g.id).includes(globalPlayers1));
 
-    // console.log(userChoiceArr);
+    console.log(userChoiceArr);
     return userChoiceArr;
 } 
 
