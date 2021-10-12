@@ -8,8 +8,8 @@ var genre = document.getElementsByClassName("genreDropDown")[0];
 var gameSection = document.getElementById("gamequery");
 var favoritesSection = document.getElementById("favorites");
 var key = "385f0044190e471aa3e65b5f36e4f71a";
-var youtubekey = 'AIzaSyB4kJaKyB1kLTG-nGKN9tRKVmhCMTVu-HE'
-var youtubebtn = document.getElementsByClassName('ytube-button')
+var youtubekey = 'AIzaSyB4kJaKyB1kLTG-nGKN9tRKVmhCMTVu-HE';
+
 
 
 // declare global arrays
@@ -24,8 +24,8 @@ var favoriteButtonArray = [];
 
 // add event listener to main search button
 search.addEventListener("click", function () {
+    $( "#gamequery" ).empty();
     //reset game card elements
-
     let user_input = document.getElementById("userinput")
     // console.log(user_input.value)
     let game = user_input.value
@@ -74,6 +74,10 @@ function gameTabs(evt, gameTab) {
 
 
 
+gameSection.addEventListener('click', baseCards);
+
+
+
 // function to add elements to local storage when plus button is clicked
 function checks() {
     // favoriteButton = document.querySelector('.add-favorite');
@@ -91,27 +95,39 @@ function checks() {
 
 
 
+function gameCards(data) {
+    for(var i = 0; i < data.results.length; i++) {
+        // create game cards using for loop and passing through data into html elements to appended them to the page.
+            var htmltag = `
+            <div class="uk-card uk-card-default game-card">
+                <div class="uk-card-media-top">
+                    <img src='${data.results[i].background_image}'"></img>
+            </div>
+            <div class="uk-card-body">
+                <button class="add-favorite" data-attrId="${data.results[i].id}">+</button>
+                <h4 class="card-title">${data.results[i].name}</h4>
+                <div class="hidden">
+                    <p class="card-item">Rating: ${data.results[i].rating}</p>
+                    <p class="card-item">Released: ${data.results[i].released}</p>
+                    <button class="reddit-button">Reddit</button>
+                    <button class="ytube-button" data-slug="${data.results[i].slug}">YouTube </button>
+                </div>
+            </div>
+            </div>`
+        // append card elelemts to the page
+            var cardEl = document.createElement('div');
+            cardEl.classList.add('grid');
+            cardEl.innerHTML = htmltag;
+            gameSection.appendChild(cardEl);
 
+    }
+}
 
 
 
 // function to create popular game cards as default upon loading the page
 function baseCards() {
     // fetching random games using RAWG url
-<<<<<<< HEAD
-    var gameURL = 'https://api.rawg.io/api/games?&key='+key;
-    fetch(gameURL) 
-    // then statement to conver to JSON
-    .then(function (response) {
-        return response.json();
-    })
-    // then statement to input data into a for loop
-    .then(function (data) {
-        gameCards(data);
-        // run function checks to add game card to local storage upon clicking the plus/favorites button
-        checks()
-    })
-=======
     var gameURL = 'https://api.rawg.io/api/games?&key=' + key;
     fetch(gameURL)
         // then statement to conver to JSON
@@ -120,35 +136,20 @@ function baseCards() {
         })
         // then statement to input data into a for loop
         .then(function (data) {
-            for (var i = 0; i < data.results.length; i++) {
-                // create game cards using for loop and passing through data into html elements to appended them to the page.
-                var htmltag = `
-                <div class="uk-card uk-card-default game-card">
-                    <div class="uk-card-media-top">
-                        <img src='${data.results[i].background_image}'"></img>
-                </div>
-                <div class="uk-card-body">
-                    <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
-                    <h4 class="card-title">${data.results[i].name}</h4>
-                    <div class="hidden">
-                        <p class="card-item">Rating: ${data.results[i].rating}</p>
-                        <p class="card-item">Released: ${data.results[i].released}</p>
-                        <button class="reddit-button">Reddit</button>
-                        <button class="ytube-button">YouTube</button>
-                    </div>
-                </div>
-                </div>`
-                // append card elelemts to the page
-                var cardEl = document.createElement('div');
-                cardEl.classList.add('grid');
-                cardEl.innerHTML = htmltag;
-                gameSection.appendChild(cardEl);
+            // run game cards function to genreate card for each game
+            gameCards(data);
+            // run function checks to add game card to local storage upon clicking the plus/favorites button
+            checks()
+        })
+};
+baseCards();
 
 
 
-
-            }
-            var youtubeURL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=portal&key=' + youtubekey;
+document.addEventListener('click',function(e){
+    if(e.target.className == 'ytube-button'){
+        var slugs = e.target.getAttribute("data-slug");
+        var youtubeURL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q='+slugs+'&key=' + youtubekey;
             fetch(youtubeURL)
                 .then(function (response) {
                     return response.json();
@@ -156,14 +157,12 @@ function baseCards() {
                 .then(function (data) {
                     let videoidtemp = data.items[0].id.videoId
                     console.log(videoidtemp)
+
+                    target = 'https://www.youtube.com/watch?app=desktop&v='+videoidtemp;
+                    window.open(target, '_blank').focus();
                 })
-            // run function checks to add game card to local storage upon clicking the plus/favorites button
-            checks()
-        })
->>>>>>> b0648f85cfd666b07c6dc928997f31a5e0aa0626
-};
-// run base cards function upon loading the page
-baseCards();
+     }
+ });
 
 
 
@@ -211,32 +210,7 @@ function favoriteFunction() {
 // call favorite function upon loading of the page
 favoriteFunction();
 
-function gameCards(data) {
-    for(var i = 0; i < data.results.length; i++) {
-        // create game cards using for loop and passing through data into html elements to appended them to the page.
-            var htmltag = `
-            <div class="uk-card uk-card-default game-card">
-                <div class="uk-card-media-top">
-                    <img src='${data.results[i].background_image}'"></img>
-            </div>
-            <div class="uk-card-body">
-                <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
-                <h4 class="card-title">${data.results[i].name}</h4>
-                <div class="hidden">
-                    <p class="card-item">Rating: ${data.results[i].rating}</p>
-                    <p class="card-item">Released: ${data.results[i].released}</p>
-                    <button class="reddit-button">Reddit</button>
-                    <button class="ytube-button">YouTube</button>
-                </div>
-            </div>
-            </div>`
-        // append card elelemts to the page
-            var cardEl = document.createElement('div');
-            cardEl.classList.add('grid');
-            cardEl.innerHTML = htmltag;
-            gameSection.appendChild(cardEl);
-    }
-}
+
 
 function searchGames(game) {
     // url variable
