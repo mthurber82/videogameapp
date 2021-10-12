@@ -6,7 +6,9 @@ var platform = document.getElementsByClassName("platformDropDown")[0];
 var players = document.getElementsByClassName('playerDropDown')[0];
 var genre = document.getElementsByClassName("genreDropDown")[0];
 var gameSection = document.getElementById("gamequery");
+var gameTabButton = document.getElementById('gamequery-button')
 var favoritesSection = document.getElementById("favorites");
+var favTabButton = document.getElementById('favorite-button');
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 var youtubekey = 'AIzaSyB4kJaKyB1kLTG-nGKN9tRKVmhCMTVu-HE';
 
@@ -18,6 +20,7 @@ var globalPlatform;
 var globalGenre;
 var globalPlayers;
 var pageResults = [];
+var keyNameArray = [];
 var favoriteButtonArray = [];
 
 
@@ -74,25 +77,63 @@ function gameTabs(evt, gameTab) {
 
 
 
-gameSection.addEventListener('click', baseCards);
+gameTabButton.addEventListener('click', function() {
+    $( "#gamequery" ).empty();
+    baseCards();
+});
 
-
+// favTabButton.addEventListener('click', function() {
+//     $( "#favorites" ).empty();
+//     checks();
+// })
 
 // function to add elements to local storage when plus button is clicked
 function checks() {
     // favoriteButton = document.querySelector('.add-favorite');
     gameSection.addEventListener('click', function (e) {
+        console.log(e.target.parentNode.parentNode)
+        var keyName = e.target.getAttribute('data-attrId')
+        let uniqueKeys = [];
 
-        if (e.target.getAttribute("data-attrid") === "" || e.target.getAttribute("data-attrid") === null) {
+        if(keyName !== null) {
+
+            keyNameArray.push(keyName);
+
+            
+                keyNameArray.forEach((c) => {
+                    if (!keyNameArray.includes(c)) {
+                        uniqueKeys.push(c);
+                    }
+                });
+            console.log(uniqueKeys);
+
+        }
+        
+        console.log(keyNameArray);
+
+        if (e.target.parentNode.parentNode.parentNode === "" || e.target.parentNode.parentNode.parentNode === null) {
             // console.log(e.target)
         } else {
-            localStorage.setItem("favorites", JSON.stringify(favoriteButtonArray))
-            // console.log(favoriteButtonArray);
-            favoriteButtonArray.push(e.target.getAttribute("data-attrid"))
+            
+            for (var i=0; i<uniqueKeys.length; i++) {
+                localStorage.setItem(keyName, e.target.parentNode.parentNode.parentNode.innerHTML);
+                favoriteKeys = localStorage.getItem('keys')
+                favoriteCard = localStorage.getItem(keyName)
+
+                console.log(favoriteKeys);
+
+                
+
+                // var cardEl = document.createElement('div');
+                // cardEl.classList.add('grid');
+                // cardEl.innerHTML = favoriteCard;
+                // favoritesSection.appendChild(cardEl);
+
+            }
         }
     })
 }
-
+checks()
 
 
 function gameCards(data) {
@@ -102,7 +143,7 @@ function gameCards(data) {
             <div class="uk-card uk-card-default game-card">
                 <div class="uk-card-media-top">
                     <img src='${data.results[i].background_image}'"></img>
-            </div>
+                </div>
             <div class="uk-card-body">
                 <button class="add-favorite" data-attrId="${data.results[i].id}">+</button>
                 <h4 class="card-title">${data.results[i].name}</h4>
@@ -138,8 +179,6 @@ function baseCards() {
         .then(function (data) {
             // run game cards function to genreate card for each game
             gameCards(data);
-            // run function checks to add game card to local storage upon clicking the plus/favorites button
-            checks()
         })
 };
 baseCards();
@@ -167,48 +206,16 @@ document.addEventListener('click',function(e){
 
 
 // function to dynamically create card elements from local storage and appending them to the favorites tab
-function favoriteFunction() {
+// function favoriteFunction() {
+//     favoriteCard = localStorage.getItem('favorites');
 
-    favArray = localStorage.getItem('favorites');
-    let tempi = JSON.parse(favArray)
-    console.log(JSON.parse(favArray))
-    for (var i = 0; i < tempi.length; i++) {
-        var favURL = 'https://api.rawg.io/api/games/' + tempi[i] + '?&key=' + key;
-        fetch(favURL)
-            // console.log(favURL)
-
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var htmltag = `
-                    <div class="uk-card uk-card-default game-card">
-                        <div class="uk-card-media-top">
-                            <img src='${data.results[i].background_image}'"></img>
-                        </div>
-                    <div class="uk-card-body">
-                        <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
-                        <h4 class="card-title">${data.results[i].name}</h4>
-                        <div class="hidden">
-                            <p class="card-item">Rating: ${data.results[i].rating}</p>
-                            <p class="card-item">Released: ${data.results[i].released}</p>
-                            <button class="reddit-button">Reddit</button>
-                            <button class="ytube-button">YouTube</button>
-                        </div>
-                    </div>
-                    </div>`
-
-                    var cardEl = document.createElement('div');
-                    cardEl.classList.add('grid');
-                    cardEl.innerHTML = htmltag;
-                    gameSection.appendChild(cardEl);
-                }
-            })
-    }
-}
+//     var cardEl = document.createElement('div');
+//     cardEl.classList.add('grid');
+//     cardEl.innerHTML = JSON.stringify(favoriteCard);
+//     favoritesSection.appendChild(cardEl);
+// }
 // call favorite function upon loading of the page
-favoriteFunction();
+// favoriteFunction();
 
 
 
@@ -299,21 +306,14 @@ function arrayFunction(filterArray) {
         .filter(game => game.parent_platforms.map(g => g.platform.name).includes(globalPlatform1))
     // .filter(game => game.tags.map(g => g.id).includes(globalPlayers1));
 
-    console.log(userChoiceArr);
+    // console.log(userChoiceArr);
+
+    
     return userChoiceArr;
 }
 
-searchParameters.addEventListener('click', gameArrayFunction());
+searchParameters.addEventListener('click', gameArrayFunction())
 
-// alternative to writing filter function
-        // var containsThisGenre = false;
-        // for (let i = 0; i < game.genres.length; i ++) {
-        //     if (game.genres[i].name === genreValue) {
-        //         containsThisGenre = true;
-        //     }
-        // }
-        // return containsThisGenre;
-        // console.log(game.genres);
-        // console.log(game.genres.map(g => g.name))
-
-        console.log('hello world')
+// searchParameters.addEventListener('click', function() {
+//     location.reload();
+// });
