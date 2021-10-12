@@ -114,3 +114,11 @@ body{
   border: none;
   padding: 10px;
 }
+
+@media (min-width: 960px) {
+  .uk-section-large {
+    padding-top: 2%;
+    padding-bottom: 140px;
+  }
+}
+    
