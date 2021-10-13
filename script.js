@@ -11,9 +11,9 @@ var favoritesSection = document.getElementById("favorites");
 var favTabButton = document.getElementById('favorite-button');
 var key = "385f0044190e471aa3e65b5f36e4f71a";
 var youtubekey = 'AIzaSyC64T6BjOZg3D0Zp4OvGS0bzSta1I8ix6M';
-
-
-
+let ss;
+let array1 = []
+let uniqueKeys = [];
 // declare global arrays
 var favoriteButton;
 var globalPlatform;
@@ -90,28 +90,62 @@ gameTabButton.addEventListener('click', function() {
 // function to add elements to local storage when plus button is clicked
 function checks() {
 
-let uniqueKeys = [];
+
 
     // favoriteButton = document.querySelector('.add-favorite');
     gameSection.addEventListener('click', function (e) {
         console.log(e.target.parentNode.parentNode)
         var keyName = e.target.getAttribute('data-attrId')
         keyNameArray.push(keyName);
-        console.log(keyNameArray);
-
+        // console.log(keyNameArray);
+        let tempc;
+        var arrayforSomething = []
         if (e.target.parentNode.parentNode.parentNode !== "" || e.target.parentNode.parentNode.parentNode !== null) {
         
-            
-            keyNameArray.forEach((c) => {
+            let something = e.target.parentNode.parentNode.parentNode
+            tempc = something.innerHTML
+             keyNameArray.forEach((c) => {
                 if (!uniqueKeys.includes(c) && (c) !== null) {
-                uniqueKeys.push(c);
+                    uniqueKeys.push(c);
+                    
                 }
             });
+         
+            
+             ss = uniqueKeys[uniqueKeys.length - 1]
+            
+            if (ss !== null) {
+                if (!array1.includes(ss)) {
+                    // console.log(ss)
+                    array1.push({
+                        id: ss,
+                        value: tempc,
+                    })
+                    // console.log(array1[array1.length-1])
+                }
+              
+                // console.log(array1.length)
+                // console.log(array1[1])
+                localStorage.setItem("keyitem", JSON.stringify(array1))
+
+            }
+            let somethelse = localStorage.getItem("keyitem")
+            let gel = JSON.parse(somethelse)
+            // console.log(gel)
+            for (let i = 0; i < array1.length; i++){
+                console.log(array1[i])
+            }
 
             // for (var i=0; i<uniqueKeys.length; i++) {
             //     localStorage.setItem(uniqueKeys[i], e.target.parentNode.parentNode.parentNode.innerHTML);
             // }
-            
+            // arrayforSomething.push([{
+            //     id: uniqueKeys[e.getAttribute[]],
+                    
+            //      value: something,
+
+            // }])
+            // console.log(arrayforSomething)
             localStorage.setItem('unique-keys', uniqueKeys);
             console.log(uniqueKeys);
             getLocalStorage();
@@ -301,17 +335,18 @@ function arrayFunction(filterArray) {
     let globalPlayers1 = localStorage.getItem('players');
     let globalPlatform1 = localStorage.getItem('platform');
 
-    // var globalGenre1 = "Shooter";
+    // var globalGenre1 = "Racing";   
     // var globalPlatform1 = "Xbox";
-    // var globalPlayers1 = 31;
+    //  var globalPlayers1 = 7;
+    console.log(filterArray)
 
-    // console.log(globalPlatform1, globalGenre1, globalPlayers1);
+     console.log(globalPlatform1, globalGenre1, globalPlayers1);
 
     var userChoiceArr = filterArray.filter(game => game.genres.map(g => g.name).includes(globalGenre1))
         .filter(game => game.parent_platforms.map(g => g.platform.name).includes(globalPlatform1))
-    // .filter(game => game.tags.map(g => g.id).includes(globalPlayers1));
+     .filter(game => game.tags.map(g => g.id).includes(globalPlayers1));
 
-    // console.log(userChoiceArr);
+    console.log(userChoiceArr);
 
     
     return userChoiceArr;
