@@ -81,8 +81,6 @@ $('.gg-logo').on('click', 'a', function (e) {
 // function to add elements to local storage when plus button is clicked
 function checks() {
 
-
-
     // favoriteButton = document.querySelector('.add-favorite');
     gameSection.addEventListener('click', function (e) {
         $( "#favorites" ).empty(e.target.getAttribute('data-attrId'));
@@ -148,22 +146,6 @@ checks()
 
 
 
-function getLocalStorage() {
-    var keyItems = localStorage.getItem('unique-keys');
-    var splitKeys = keyItems.split(',');
-
-    for (var i=0; i< splitKeys.length; i++) {
-
-        var cardEl = document.createElement('div');
-        cardEl.classList.add('grid');
-        cardEl.innerHTML = localStorage.getItem(splitKeys[i]);
-        favoritesSection.append(cardEl);
-    }
-}
-getLocalStorage();
-
-
-
 function gameCards(data) {
     for(var i = 0; i < data.results.length; i++) {
         // create game cards using for loop and passing through data into html elements to appended them to the page.
@@ -178,7 +160,7 @@ function gameCards(data) {
                 <div class="hidden">
                     <p class="card-item">Rating: ${data.results[i].rating}</p>
                     <p class="card-item">Released: ${data.results[i].released}</p>
-                    <button class="reddit-button">Reddit</button>
+                    <button class="reddit-button">Reddit [coming soon]</button>
                     <button class="ytube-button" data-slug="${data.results[i].slug}">YouTube </button>
                 </div>
             </div>
@@ -262,7 +244,7 @@ function searchGames(game) {
                     <div class="hidden">
                         <p class="card-item">Rating: ${data.results[i].rating}</p>
                         <p class="card-item">Released: ${data.results[i].released}</p>
-                        <button class="reddit-button">Reddit</button>
+                        <button class="reddit-button">Reddit [coming soon]</button>
                         <button class="ytube-button">YouTube</button>
                     </div>
                 </div>
@@ -329,7 +311,7 @@ function arrayFunction(filterArray) {
                 <div class="hidden">
                     <p class="card-item">Rating: ${userChoiceArr[i].rating}</p>
                     <p class="card-item">Released: ${userChoiceArr[i].released}</p>
-                    <button class="reddit-button">Reddit</button>
+                    <button class="reddit-button">Reddit [coming soon]</button>
                     <button class="ytube-button" data-slug="${userChoiceArr[i].slug}">YouTube </button>
                 </div>
             </div>
