@@ -5,7 +5,8 @@ Our mission is to create an app meant for game research purposes rather then for
 
 As a user, I can search for games based on Platform, Genre, and Player requirements.
 
-[image]
+![A user clicks on slots on the color-coded calendar and edits the events.](Assets/GAMEGO.gif)
+
 
 Results are displayed in a grid view
 
