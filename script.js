@@ -10,7 +10,7 @@ var gameTabButton = document.getElementById('gamequery-button')
 var favoritesSection = document.getElementById("favorites");
 var favTabButton = document.getElementById('favorite-button');
 var key = "385f0044190e471aa3e65b5f36e4f71a";
-var youtubekey = 'AIzaSyB4kJaKyB1kLTG-nGKN9tRKVmhCMTVu-HE';
+var youtubekey = 'AIzaSyC64T6BjOZg3D0Zp4OvGS0bzSta1I8ix6M';
 
 
 
@@ -89,51 +89,56 @@ gameTabButton.addEventListener('click', function() {
 
 // function to add elements to local storage when plus button is clicked
 function checks() {
+
+let uniqueKeys = [];
+
     // favoriteButton = document.querySelector('.add-favorite');
     gameSection.addEventListener('click', function (e) {
         console.log(e.target.parentNode.parentNode)
         var keyName = e.target.getAttribute('data-attrId')
-        let uniqueKeys = [];
-
-        if(keyName !== null) {
-
-            keyNameArray.push(keyName);
-
-            
-                keyNameArray.forEach((c) => {
-                    if (!keyNameArray.includes(c)) {
-                        uniqueKeys.push(c);
-                    }
-                });
-            console.log(uniqueKeys);
-
-        }
-        
+        keyNameArray.push(keyName);
         console.log(keyNameArray);
 
-        if (e.target.parentNode.parentNode.parentNode === "" || e.target.parentNode.parentNode.parentNode === null) {
-            // console.log(e.target)
-        } else {
+        if (e.target.parentNode.parentNode.parentNode !== "" || e.target.parentNode.parentNode.parentNode !== null) {
+        
             
-            for (var i=0; i<uniqueKeys.length; i++) {
-                localStorage.setItem(keyName, e.target.parentNode.parentNode.parentNode.innerHTML);
-                favoriteKeys = localStorage.getItem('keys')
-                favoriteCard = localStorage.getItem(keyName)
+            keyNameArray.forEach((c) => {
+                if (!uniqueKeys.includes(c) && (c) !== null) {
+                uniqueKeys.push(c);
+                }
+            });
 
-                console.log(favoriteKeys);
-
-                
-
-                // var cardEl = document.createElement('div');
-                // cardEl.classList.add('grid');
-                // cardEl.innerHTML = favoriteCard;
-                // favoritesSection.appendChild(cardEl);
-
-            }
+            // for (var i=0; i<uniqueKeys.length; i++) {
+            //     localStorage.setItem(uniqueKeys[i], e.target.parentNode.parentNode.parentNode.innerHTML);
+            // }
+            
+            localStorage.setItem('unique-keys', uniqueKeys);
+            console.log(uniqueKeys);
+            getLocalStorage();
         }
     })
 }
 checks()
+
+
+function getLocalStorage() {
+    var keyItems = localStorage.getItem('unique-keys');
+    var splitKeys = keyItems.split(',');
+
+    console.log(splitKeys.length)
+    console.log(splitKeys[0])
+    console.log(splitKeys[1])
+    console.log(splitKeys[2])
+    for (var i=0; i< splitKeys.length; i++) {
+
+        var cardEl = document.createElement('div');
+        cardEl.classList.add('grid');
+        cardEl.innerHTML = localStorage.getItem(splitKeys[i]);
+        favoritesSection.append(cardEl);
+    }
+}
+getLocalStorage();
+
 
 
 function gameCards(data) {
