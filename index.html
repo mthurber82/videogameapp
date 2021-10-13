@@ -11,21 +11,21 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>GAMEGO</title>
 </head>
-
-<body>
-    <nav class="uk-navbar-container uk-margin" uk-navbar>
-        <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo" href="#">GG</a>
-            <div class="uk-navbar-item">
-                <form action="javascript:void(0)">
-                    <input class="uk-input uk-form-width-small" type="text" placeholder="Find a Game" id="userinput">
-                    <button class="uk-button uk-button-default" id="search">Search</button>
-                </form>
-            </div>
-            <div class="uk-navbar-right">
-                <a class="uk-navbar-item uk-logo" href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank">▶</a>
-            </div>
+<nav class="uk-navbar-container uk-margin" uk-navbar>
+    <div class="uk-navbar-left">
+        <a class="uk-navbar-item uk-logo" href="#">GG</a>
+        <div class="uk-navbar-item">
+            <form action="javascript:void(0)">
+                <input class="uk-input uk-form-width-small" type="text" placeholder="Find a Game" id="userinput">
+                <button class="uk-button uk-button-default" id="search">Search</button>
+            </form>
         </div>
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-item uk-logo" href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank">▶</a>
+        </div>
+    </div>
+<body>
+   
         <div class="tab">
             <button id="gamequery-button" class="tablinks" onclick="gameTabs(event, 'gamequery')">Games 🎮</button>
             <button id="favorites-button" class="tablinks" onclick="gameTabs(event, 'favorites')">Favorites ⭐</button>
@@ -42,9 +42,9 @@
                         <div class="uk-form-controls">
                             <select class="uk-select uk-form-width-small platformDropDown" id="form-stacked-select">
                                 <option value="" disabled selected hidden>Platform</option>
-                                <option id="playstation">PlayStation</option>
-                                <option id="xbox">Xbox</option>
-                                <option id="pc">PC</option>
+                                <option id="playstation" aria-label = "playstation option" >PlayStation</option>
+                                <option id="xbox" aria-label = "xbox option" >Xbox</option>
+                                <option id="pc" aria-label = "pc option" >PC</option>
                             </select>
                         </div>
                     </div>
@@ -54,12 +54,12 @@
                         <div class="uk-form-controls">
                             <select class="uk-select uk-form-width-small genreDropDown" id="form-stacked-select">
                                 <option value="" disabled selected hidden>Genre</option>
-                                <option id="Action">Action</option>
-                                <option id="Shooter">Shooter</option>
-                                <option id="Racing">Racing</option>
-                                <option id="Adventure">Adventure</option>
-                                <option id="RPG">RPG</option>
-                                <option id="Fighting">Fighting</option>
+                                <option id="Action" aria-label = "Action">Action</option>
+                                <option id="Shooter" aria-label = "Shooter">Shooter</option>
+                                <option id="Racing" aria-label = "Racing">Racing</option>
+                                <option id="Adventure" aria-label = "Adventure" >Adventure</option>
+                                <option id="RPG" aria-label = "RPG">RPG</option>
+                                <option id="Fighting" aria-label = "Fighting">Fighting</option>
                             </select>
                         </div>
                     </div>
@@ -68,11 +68,11 @@
                         <div class="uk-form-controls">
                             <select class="uk-select uk-form-width-small playerDropDown" id="form-stacked-select">
                                 <option value="" disabled selected hidden>Player</option>
-                                <option id="singleplayer">Singleplayer</option>
-                                <option id="multiplayer">Multiplayer</option>
+                                <option id="singleplayer" aria-label = "Singleplayer option">Singleplayer</option>
+                                <option id="multiplayer" aria-label = "Multiplayer option">Multiplayer</option>
                             </select>
                         </div><br>
-                        <button class="uk-button uk-button-primary" id="searchgames">Search Games</button>
+                        <button class="uk-button uk-button-primary" id="searchgames" aria-label = "search game button">Search Games</button>
                     </div>
                 </form>
             </div>
