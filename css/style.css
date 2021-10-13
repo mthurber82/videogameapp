@@ -119,6 +119,67 @@ body{
   .uk-section-large {
     padding-top: 2%;
     padding-bottom: 140px;
+  
+    
   }
 }
-    
+@media (max-width: 960px) {
+  #searchbar {
+    width: 20%;
+  }
+}
+
+@media (max-width: 960px) {
+  #searchgames {
+    width: 100%;
+    font-size: 70%;
+  }
+}
+/* .uk-section-large {
+background-color: #55efc4;
+background-image: linear-gradient(315deg, #55efc4 0%, #000000 74%);
+
+} */
+.uk-section-large{
+  background-image: url('537089.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.side-search{
+  background-color: black;
+  background-image: url('images.jpg');
+}
+.side-bar{
+  background-color: black;
+}
+
+#searchgames{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin:0 0.3em 0.3em 0;
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:#4ef1f1;
+  text-align:center;
+  transition: all 0.2s;
+  }
+  #searchgames:hover{
+  background-color:#e71b1b;
+  }
+  @media all and (max-width:30em){
+   #searchgames{
+  display:block;
+  margin:0.2em auto;
+  }
+  }
+
+  @media (max-width: 300px){
+    #searchgames{
+      font-size: 5%;
+    }
+  }
