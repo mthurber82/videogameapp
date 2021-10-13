@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 .border{
   border: red solid 1px;
 }
@@ -10,6 +14,55 @@ body{
   background-color:rgb(38, 38, 39);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.uk-navbar-container {
+  background-color: #790606;
+  background-image: linear-gradient(315deg, #790606 25%, #470505 50%, #000000 100%);
+}
+
+.uk-section-large {
+  background-color: #790606;
+  background-image: linear-gradient(315deg, #790606 25%, #470505 50%, #000000 100%);  
+}
+
+.side-search{
+  background-color: black;
+  background-image: url('images.jpg');
+}
+
+.side-bar{
+  background-color: black;
+}
+
+.side-search-body {
+  position: fixed;
+  color: white;
+}
+
+.side-search-body h3 {
+  color: white;
+}
+
+.side-search-body label {
+  color: white;
+}
+#searchgames{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin:0 0.3em 0.3em 0;
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:rgb(35, 205, 220);
+  text-align:center;
+  transition: all 0.2s;
+}
+
+#searchgames:hover{
+  background-color:#e71b1b;
 }
 
 .gamequery{
@@ -26,6 +79,12 @@ body{
   background-size: cover;
 }
 
+.no-results {
+  position: relative;
+  width: 100%;
+  height: 200%;
+}
+
 .game-card {
   color: white;
   background-color: rgb(52, 54, 56);
@@ -37,11 +96,13 @@ body{
 }
 
 .game-card h4 {
+  font-family: 'Roboto Condensed', sans-serif;
   color: white;
 }
 
 .card-item {
- line-height: 2px;
+ line-height: 4px;
+ font-family: 'Roboto Condensed', sans-serif;
 }
 
 .hidden {
@@ -83,23 +144,7 @@ body{
   background-color: rgb(163, 38, 16);
 }
 
-.side-search {
-  background-color: rgb(52, 54, 56);
-}
 
-.side-search-body {
-  position: fixed;
-  background-color: rgb(62, 64, 66);
-  color: white;
-}
-
-.side-search-body h3 {
-  color: white;
-}
-
-.side-search-body label {
-  color: white;
-}
 
 .games-display {
   background-color: black;
@@ -110,6 +155,7 @@ body{
   padding: 20px;
   padding-left: 55%
 }
+
 .tablinks {
   border: none;
   padding: 10px;
@@ -119,10 +165,9 @@ body{
   .uk-section-large {
     padding-top: 2%;
     padding-bottom: 140px;
-  
-    
   }
 }
+
 @media (max-width: 960px) {
   #searchbar {
     width: 20%;
@@ -135,51 +180,16 @@ body{
     font-size: 70%;
   }
 }
-/* .uk-section-large {
-background-color: #55efc4;
-background-image: linear-gradient(315deg, #55efc4 0%, #000000 74%);
 
-} */
-.uk-section-large{
-  background-image: url('537089.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
-.side-search{
-  background-color: black;
-  background-image: url('images.jpg');
-}
-.side-bar{
-  background-color: black;
-}
-
-#searchgames{
-  display:inline-block;
-  padding:0.3em 1.2em;
-  margin:0 0.3em 0.3em 0;
-  border-radius:2em;
-  box-sizing: border-box;
-  text-decoration:none;
-  font-family:'Roboto',sans-serif;
-  font-weight:300;
-  color:#FFFFFF;
-  background-color:#4ef1f1;
-  text-align:center;
-  transition: all 0.2s;
-  }
-  #searchgames:hover{
-  background-color:#e71b1b;
-  }
-  @media all and (max-width:30em){
-   #searchgames{
+@media all and (max-width:30em){
+  #searchgames{
   display:block;
   margin:0.2em auto;
   }
-  }
+}
 
-  @media (max-width: 300px){
+@media (max-width: 300px){
     #searchgames{
-      font-size: 5%;
-    }
+    font-size: 5%;
   }
+}
