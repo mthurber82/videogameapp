@@ -8,10 +8,6 @@ As a user, I can search for games based on Platform, Genre, and Player requireme
 ![A user clicks on slots on the color-coded calendar and edits the events.](assets/GAMEGO.gif)
 
 
-Results are displayed in a grid view
-
-[image]
-
 ## Acceptance Criteria
 
 GIVEN a list of search criteria
