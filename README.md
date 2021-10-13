@@ -38,5 +38,5 @@ RAWG
 * https://cssgradient.io/gradient-backgrounds/
 
 ## Deployed URL & Github Repo
-[link to repository] https://github.com/mthurber82/videogameapp
-[link to live page] https://mthurber82.github.io/videogameapp/
+* [link to repository] https://github.com/mthurber82/videogameapp
+* [link to live page] https://mthurber82.github.io/videogameapp/
