@@ -18,7 +18,7 @@ let arrayNew = new Set()
 var favoriteButtonArray = [];
 
 function baseCards() {
-
+    var youTubeURL = ''
     var gameURL = 'https://api.rawg.io/api/games?&key='+key;
     fetch(gameURL) 
     
