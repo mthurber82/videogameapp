@@ -146,7 +146,7 @@ function gameCards(data) {
             var htmltag = `
             <div class="uk-card uk-card-default game-card">
                 <div class="uk-card-media-top">
-                    <img src='${data.results[i].background_image}'"></img>
+                    <img src='${data.results[i].background_image}' alt = '${data.results[i].name}'></img>
                 </div>
             <div class="uk-card-body">
                 <button class="add-favorite" data-attrId="${data.results[i].id}">+</button>
@@ -239,10 +239,10 @@ function searchGames(game) {
                         var htmltag = `
                     <div class="uk-card uk-card-default game-card">
                         <div class="uk-card-media-top">
-                            <img src='${data.results[i].background_image}'"></img>
+                            <img src='${data.results[i].background_image}' alt ='${data.results[i].name}'></img>
                         </div>
                     <div class="uk-card-body">
-                        <button class="add-favorite" data-attrId="${data.results[i].id}"">+</button>
+                        <button class="add-favorite" data-attrId="${data.results[i].id}">+</button>
                         <h4 class="card-title">${data.results[i].name}</h4>
                         <div class="hidden">
                             <p class="card-item">Rating: ${data.results[i].rating}</p>
@@ -306,7 +306,7 @@ function arrayFunction(filterArray) {
             var htmltag = `
             <div class="uk-card uk-card-default game-card">
                 <div class="uk-card-media-top">
-                    <img src='${userChoiceArr[i].background_image}'></img>
+                    <img src='${userChoiceArr[i].background_image}''  alt = '${userChoiceArr[i].name}'></img>
                 </div>
             <div class="uk-card-body">
                 <button class="add-favorite" data-attrId="${userChoiceArr[i].id}">+</button>
